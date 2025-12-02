@@ -54,6 +54,13 @@ async def websocket_endpoint(
                     game.id, {"type": "timer_paused", "data": {"paused": paused}}
                 )
 
+            elif msg_type == "game_result":
+                # Broadcast game result (victory/defeat) to all players
+                result = message_data.get("result", "")
+                await manager.broadcast_to_game(
+                    game.id, {"type": "game_result", "data": {"result": result}}
+                )
+
             elif msg_type == "request_update":
                 # Send current game state
                 players = db.query(Player).filter(Player.game_id == game.id).all()

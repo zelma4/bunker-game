@@ -401,6 +401,14 @@ class GameService:
         if not voter or not target or voter.has_voted:
             return False
 
+        # Eliminated players can't vote
+        if voter.status != PlayerStatus.PLAYING:
+            return False
+
+        # Can't vote for eliminated players
+        if target.status != PlayerStatus.PLAYING:
+            return False
+
         # Can't vote for yourself
         if voter_id == target_id:
             return False

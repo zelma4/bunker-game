@@ -307,7 +307,7 @@
 
                                         <!-- Vote button -->
                                         <div
-                                            x-show="game.phase === 'voting' && player.status === 'playing' && myPlayer && !myPlayer.has_voted && player.id !== myPlayer.id">
+                                            x-show="game.phase === 'voting' && player.status === 'playing' && myPlayer && myPlayer.status === 'playing' && !myPlayer.has_voted && player.id !== myPlayer.id">
                                             <button @click="vote(player.id)" class="btn-vote">
                                                 Голос
                                             </button>
@@ -444,16 +444,36 @@
                 <!-- Game Ended -->
                 <div x-show="game.phase === 'ended'" class="max-w-2xl mx-auto text-center py-12 fade-in">
                     <h2
-                        class="text-5xl font-orbitron font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-500">
-                        ГРА ЗАВЕРШЕНА
+                        class="text-5xl font-orbitron font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r"
+                        :class="gameResult === 'victory' ? 'from-green-400 to-cyan-500' : gameResult === 'defeat' ? 'from-red-400 to-orange-500' : 'from-gray-400 to-gray-500'"
+                        x-text="gameResult === 'victory' ? '🎉 ПЕРЕМОГА!' : gameResult === 'defeat' ? '💀 ПОРАЗКА' : 'ГРА ЗАВЕРШЕНА'">
                     </h2>
 
-                    <div class="bg-bunker-darker border border-green-900/30 rounded-lg p-8 mb-6">
-                        <h3 class="text-2xl font-bold mb-4 text-green-400">🎉 Виживші</h3>
+                    <div class="bg-bunker-darker border rounded-lg p-8 mb-6"
+                        :class="gameResult === 'victory' ? 'border-green-900/30' : gameResult === 'defeat' ? 'border-red-900/30' : 'border-gray-900/30'">
+                        <h3 class="text-2xl font-bold mb-4" 
+                            :class="gameResult === 'victory' ? 'text-green-400' : gameResult === 'defeat' ? 'text-red-400' : 'text-gray-400'"
+                            x-text="gameResult === 'victory' ? '🎉 Виживші врятувались!' : gameResult === 'defeat' ? '☠️ Виживші не впоралися...' : '👥 Виживші'">
+                        </h3>
                         <div class="space-y-2">
                             <template x-for="player in players.filter(p => p.status === 'survived')" :key="player.id">
                                 <div class="text-xl font-semibold" x-text="player.name"></div>
                             </template>
+                        </div>
+                    </div>
+
+                    <!-- Host decides outcome -->
+                    <div x-show="isHost && !gameResult" class="mb-6 p-4 bg-bunker-dark border border-yellow-600/50 rounded-lg">
+                        <p class="text-yellow-400 font-semibold mb-4">🎯 Як хост, визначте результат гри:</p>
+                        <div class="flex justify-center gap-4">
+                            <button @click="setGameResult('victory')" 
+                                class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-all flex items-center gap-2">
+                                <span>🏆</span> ПЕРЕМОГА
+                            </button>
+                            <button @click="setGameResult('defeat')"
+                                class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all flex items-center gap-2">
+                                <span>💀</span> ПОРАЗКА
+                            </button>
                         </div>
                     </div>
 

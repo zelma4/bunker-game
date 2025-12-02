@@ -39,6 +39,7 @@ function gamePage(gameCode) {
         rightSidebarOpen: false,
         isPaused: false,
         pausedTimeRemaining: 0,
+        gameResult: null,  // 'victory' or 'defeat'
 
         // Max rounds based on player count
         get maxRounds() {
@@ -301,6 +302,11 @@ function gamePage(gameCode) {
                     } else {
                         this.addGameLog('▶️ Гра продовжується', 'phase');
                     }
+                    break;
+                case 'game_result':
+                    this.gameResult = data.data.result;
+                    const resultText = data.data.result === 'victory' ? '🏆 ПЕРЕМОГА!' : '💀 ПОРАЗКА';
+                    this.addGameLog(`Результат гри: <strong>${resultText}</strong>`, 'phase');
                     break;
             }
         },
@@ -891,6 +897,26 @@ function gamePage(gameCode) {
         copyCode() {
             navigator.clipboard.writeText(this.gameCode);
             alert('Код скопійовано!');
+        },
+
+        setGameResult(result) {
+            if (!this.isHost) {
+                alert('Тільки хост може визначити результат гри!');
+                return;
+            }
+            
+            this.gameResult = result;
+            
+            // Broadcast result to all players
+            if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+                this.ws.send(JSON.stringify({
+                    type: 'game_result',
+                    result: result
+                }));
+            }
+            
+            const resultText = result === 'victory' ? '🏆 ПЕРЕМОГА!' : '💀 ПОРАЗКА';
+            this.addGameLog(`Результат гри: <strong>${resultText}</strong>`, 'phase');
         },
 
         scrollChatToBottom() {
