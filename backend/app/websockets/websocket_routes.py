@@ -47,6 +47,13 @@ async def websocket_endpoint(
                     message_data.get("message", ""),
                 )
 
+            elif msg_type == "pause_toggle":
+                # Broadcast pause state to all players
+                paused = message_data.get("paused", False)
+                await manager.broadcast_to_game(
+                    game.id, {"type": "timer_paused", "data": {"paused": paused}}
+                )
+
             elif msg_type == "request_update":
                 # Send current game state
                 players = db.query(Player).filter(Player.game_id == game.id).all()
@@ -54,7 +61,7 @@ async def websocket_endpoint(
                 game_state = {
                     "phase": game.phase.value,
                     "current_round": game.current_round,
-                    "phase_end_time": game.phase_end_time.isoformat() + 'Z'
+                    "phase_end_time": game.phase_end_time.isoformat() + "Z"
                     if game.phase_end_time
                     else None,
                     "players": [
@@ -65,7 +72,9 @@ async def websocket_endpoint(
                             "is_host": p.is_host,
                             "votes_received": p.votes_received,
                             "has_voted": p.has_voted,
-                            "revealed_cards": p.revealed_cards if p.revealed_cards else [],
+                            "revealed_cards": p.revealed_cards
+                            if p.revealed_cards
+                            else [],
                         }
                         for p in players
                     ],

@@ -134,6 +134,7 @@ async def join_game(
 
     # Broadcast player joined via WebSocket
     from ..websockets.connection_manager import manager
+
     await manager.send_player_joined(game.id, player.name)
 
     return response_data
@@ -157,7 +158,7 @@ async def get_game(game_code: str, request: Request, db: Session = Depends(get_d
         p_resp = PlayerResponse.model_validate(p)
         is_me = p.session_id == session_id
         p_resp.is_me = is_me
-        
+
         # Always ensure revealed_cards is a list (not None)
         p_resp.revealed_cards = p.revealed_cards if p.revealed_cards else []
         revealed = p_resp.revealed_cards
@@ -237,7 +238,9 @@ async def start_game(game_id: int, request: Request, db: Session = Depends(get_d
     db.refresh(game)
 
     # Log phase and timer info
-    print(f"DEBUG: Game started - phase={game.phase.value}, phase_end_time={game.phase_end_time}")
+    print(
+        f"DEBUG: Game started - phase={game.phase.value}, phase_end_time={game.phase_end_time}"
+    )
 
     # Broadcast game started via WebSocket
     from ..websockets.connection_manager import manager
@@ -245,7 +248,7 @@ async def start_game(game_id: int, request: Request, db: Session = Depends(get_d
     await manager.send_phase_change(
         game_id,
         game.phase.value,
-        game.phase_end_time.isoformat() + 'Z' if game.phase_end_time else None,
+        game.phase_end_time.isoformat() + "Z" if game.phase_end_time else None,
         game.current_round,
     )
 
@@ -284,18 +287,18 @@ async def vote(
 
     # Broadcast vote update via WebSocket
     from ..websockets.connection_manager import manager
-    
+
     # Get updated vote counts
     players = db.query(Player).filter(Player.game_id == game_id).all()
     votes = {
         p.id: {
             "name": p.name,
             "votes_received": p.votes_received,
-            "has_voted": p.has_voted
+            "has_voted": p.has_voted,
         }
         for p in players
     }
-    
+
     await manager.send_vote_update(game_id, votes)
 
     return {"message": "Vote registered"}
@@ -304,20 +307,23 @@ async def vote(
 # Rate limiting for phase advancement
 _last_phase_advance = {}  # game_id -> datetime
 
+
 @router.post("/{game_id}/advance-phase")
 async def advance_phase(game_id: int, db: Session = Depends(get_db)):
     """Advance to next game phase (called by timer or host)"""
     global _last_phase_advance
-    
+
     # Rate limiting: prevent calling within 5 seconds of last call
     now = datetime.utcnow()
     last_call = _last_phase_advance.get(game_id)
     if last_call and (now - last_call).total_seconds() < 5:
-        print(f"DEBUG: Ignoring duplicate advance_phase call for game {game_id} (rate limited)")
+        print(
+            f"DEBUG: Ignoring duplicate advance_phase call for game {game_id} (rate limited)"
+        )
         return {"message": "Rate limited", "phase": "unchanged"}
-    
+
     _last_phase_advance[game_id] = now
-    
+
     result = GameService.advance_phase(db, game_id)
 
     if not result:
@@ -335,16 +341,13 @@ async def advance_phase(game_id: int, db: Session = Depends(get_db)):
     if result.get("eliminated_player"):
         eliminated = result["eliminated_player"]
         await manager.send_player_eliminated(
-            game_id,
-            eliminated["id"],
-            eliminated["name"],
-            eliminated["revealed_cards"]
+            game_id, eliminated["id"], eliminated["name"], eliminated["revealed_cards"]
         )
 
     await manager.send_phase_change(
         game_id,
         game.phase.value,
-        game.phase_end_time.isoformat() + 'Z' if game.phase_end_time else None,
+        game.phase_end_time.isoformat() + "Z" if game.phase_end_time else None,
         game.current_round,
     )
 
@@ -352,7 +355,11 @@ async def advance_phase(game_id: int, db: Session = Depends(get_db)):
     if game.phase == GamePhase.CARD_REVEAL:
         await manager.send_bunker_card_revealed(game_id, game.revealed_bunker_cards)
 
-    return {"phase": result["phase"].value if hasattr(result["phase"], 'value') else result["phase"]}
+    return {
+        "phase": result["phase"].value
+        if hasattr(result["phase"], "value")
+        else result["phase"]
+    }
 
 
 @router.get("/{game_id}/my-character", response_model=CharacterTraits)
@@ -492,8 +499,8 @@ async def use_special_condition(
 
     if player.special_used:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, 
-            detail="Special condition already used"
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Special condition already used",
         )
 
     # Execute special condition
@@ -505,16 +512,14 @@ async def use_special_condition(
     if not result.get("success"):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=result.get("message", "Failed to use special condition")
+            detail=result.get("message", "Failed to use special condition"),
         )
 
     # Broadcast to other players
     from ..websockets.connection_manager import manager
 
     await manager.send_special_card_used(
-        game_id, 
-        player.name, 
-        player.special_condition.get("name")
+        game_id, player.name, player.special_condition.get("name")
     )
 
     # Refresh player to get updated data
@@ -523,6 +528,7 @@ async def use_special_condition(
     return {
         "message": result.get("message"),
         "effect": result.get("effect"),
-        "data": {k: v for k, v in result.items() if k not in ["success", "message", "effect"]}
+        "data": {
+            k: v for k, v in result.items() if k not in ["success", "message", "effect"]
+        },
     }
-

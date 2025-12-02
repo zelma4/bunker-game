@@ -98,9 +98,9 @@ class GameResponse(BaseModel):
         if v is None:
             return None
         if isinstance(v, datetime):
-            return v.isoformat() + 'Z'
-        if isinstance(v, str) and not v.endswith('Z'):
-            return v + 'Z'
+            return v.isoformat() + "Z"
+        if isinstance(v, str) and not v.endswith("Z"):
+            return v + "Z"
         return v
 
 
@@ -145,7 +145,7 @@ class RevealCardRequest(BaseModel):
 
 class UseSpecialRequest(BaseModel):
     """Schema for using special condition"""
-    
+
     # Optional parameters depending on special type
     target_player_id: Optional[int] = None
     source_player_id: Optional[int] = None

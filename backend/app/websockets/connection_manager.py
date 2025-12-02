@@ -96,10 +96,16 @@ class ConnectionManager:
         )
 
     async def send_phase_change(
-        self, game_id: int, phase: str, phase_end_time: str = None, current_round: int = None
+        self,
+        game_id: int,
+        phase: str,
+        phase_end_time: str = None,
+        current_round: int = None,
     ):
         """Notify about phase change"""
-        print(f"DEBUG: Broadcasting phase_change to game {game_id}: phase={phase}, phase_end_time={phase_end_time}, current_round={current_round}")
+        print(
+            f"DEBUG: Broadcasting phase_change to game {game_id}: phase={phase}, phase_end_time={phase_end_time}, current_round={current_round}"
+        )
         await self.broadcast_to_game(
             game_id,
             {
@@ -107,7 +113,7 @@ class ConnectionManager:
                 "data": {
                     "phase": phase,
                     "phase_end_time": phase_end_time,
-                    "current_round": current_round
+                    "current_round": current_round,
                 },
             },
         )

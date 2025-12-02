@@ -38,14 +38,14 @@ class Settings(BaseSettings):
         "http://localhost:8765",
         "http://localhost:8000",
     ]
-    
-    @field_validator('CORS_ORIGINS', mode='before')
+
+    @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
     def parse_cors_origins(cls, v):
         """Parse CORS_ORIGINS from string or list"""
         if isinstance(v, str):
             # Split by comma and strip whitespace
-            return [origin.strip() for origin in v.split(',') if origin.strip()]
+            return [origin.strip() for origin in v.split(",") if origin.strip()]
         return v
 
     # Rate Limiting

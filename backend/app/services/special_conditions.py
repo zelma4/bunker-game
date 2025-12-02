@@ -19,17 +19,17 @@ class SpecialConditionHandler:
         db: Session,
         game_id: int,
         player_id: int,
-        params: Optional[Dict[str, Any]] = None
+        params: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """
         Execute a player's special condition
-        
+
         Args:
             db: Database session
             game_id: Game ID
             player_id: Player ID who is using their special
             params: Additional parameters (e.g., target_player_id, card_type)
-            
+
         Returns:
             Dict with result and message
         """
@@ -37,10 +37,11 @@ class SpecialConditionHandler:
             params = {}
 
         # Get player and game
-        player = db.query(Player).filter(
-            Player.id == player_id,
-            Player.game_id == game_id
-        ).first()
+        player = (
+            db.query(Player)
+            .filter(Player.id == player_id, Player.game_id == game_id)
+            .first()
+        )
 
         if not player or not player.special_condition:
             return {"success": False, "message": "No special condition"}
@@ -96,12 +97,12 @@ class SpecialConditionHandler:
 
         try:
             result = handler(db, game, player, params)
-            
+
             if result.get("success"):
                 # Mark as used only if successful
                 player.special_used = True
                 db.commit()
-                
+
             return result
         except Exception as e:
             db.rollback()
@@ -117,7 +118,7 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "Особлива умова активована. Буде враховано при перевірці виживання.",
-            "effect": "passive"
+            "effect": "passive",
         }
 
     @staticmethod
@@ -127,10 +128,11 @@ class SpecialConditionHandler:
         if not target_id:
             return {"success": False, "message": "Потрібен target_player_id"}
 
-        target = db.query(Player).filter(
-            Player.id == target_id,
-            Player.game_id == game.id
-        ).first()
+        target = (
+            db.query(Player)
+            .filter(Player.id == target_id, Player.game_id == game.id)
+            .first()
+        )
 
         if not target:
             return {"success": False, "message": "Гравець не знайдений"}
@@ -143,7 +145,7 @@ class SpecialConditionHandler:
             "success": True,
             "message": f"Картки здоров'я обмінано з {target.name}",
             "effect": "swap_health",
-            "target_player_id": target_id
+            "target_player_id": target_id,
         }
 
     @staticmethod
@@ -154,9 +156,9 @@ class SpecialConditionHandler:
             return {"success": False, "message": "Потрібен target_player_id"}
 
         # Store target in player data (will be checked on elimination)
-        if not hasattr(player, 'special_data'):
+        if not hasattr(player, "special_data"):
             player.special_data = {}
-        
+
         player.special_data = {"hostage_target": target_id}
         flag_modified(player, "special_data")
         db.commit()
@@ -165,7 +167,7 @@ class SpecialConditionHandler:
             "success": True,
             "message": "Заручник обрано. Якщо вас вигонять - він іде з вами.",
             "effect": "hostage_set",
-            "target_player_id": target_id
+            "target_player_id": target_id,
         }
 
     @staticmethod
@@ -175,10 +177,11 @@ class SpecialConditionHandler:
         if not target_id:
             return {"success": False, "message": "Потрібен target_player_id"}
 
-        target = db.query(Player).filter(
-            Player.id == target_id,
-            Player.game_id == game.id
-        ).first()
+        target = (
+            db.query(Player)
+            .filter(Player.id == target_id, Player.game_id == game.id)
+            .first()
+        )
 
         if not target:
             return {"success": False, "message": "Гравець не знайдений"}
@@ -192,7 +195,7 @@ class SpecialConditionHandler:
             "success": True,
             "message": f"Вилікувано {target.name}: {old_health} → Здоровий як бик",
             "effect": "heal",
-            "target_player_id": target_id
+            "target_player_id": target_id,
         }
 
     @staticmethod
@@ -200,14 +203,18 @@ class SpecialConditionHandler:
         """Шпигун: Подивитись закриту картку"""
         target_id = params.get("target_player_id")
         card_type = params.get("card_type")
-        
-        if not target_id or not card_type:
-            return {"success": False, "message": "Потрібен target_player_id та card_type"}
 
-        target = db.query(Player).filter(
-            Player.id == target_id,
-            Player.game_id == game.id
-        ).first()
+        if not target_id or not card_type:
+            return {
+                "success": False,
+                "message": "Потрібен target_player_id та card_type",
+            }
+
+        target = (
+            db.query(Player)
+            .filter(Player.id == target_id, Player.game_id == game.id)
+            .first()
+        )
 
         if not target:
             return {"success": False, "message": "Гравець не знайдений"}
@@ -227,7 +234,7 @@ class SpecialConditionHandler:
             "effect": "spy",
             "target_player_id": target_id,
             "card_type": card_type,
-            "card_value": card_value
+            "card_value": card_value,
         }
 
     @staticmethod
@@ -238,12 +245,16 @@ class SpecialConditionHandler:
             return {"success": False, "message": "Потрібен target_player_id"}
 
         if game.phase != GamePhase.VOTING:
-            return {"success": False, "message": "Можна використати тільки під час голосування"}
+            return {
+                "success": False,
+                "message": "Можна використати тільки під час голосування",
+            }
 
-        target = db.query(Player).filter(
-            Player.id == target_id,
-            Player.game_id == game.id
-        ).first()
+        target = (
+            db.query(Player)
+            .filter(Player.id == target_id, Player.game_id == game.id)
+            .first()
+        )
 
         if not target or target.votes_received <= 0:
             return {"success": False, "message": "У гравця немає голосів"}
@@ -255,7 +266,7 @@ class SpecialConditionHandler:
             "success": True,
             "message": f"Скасовано 1 голос проти {target.name}",
             "effect": "cancel_vote",
-            "target_player_id": target_id
+            "target_player_id": target_id,
         }
 
     @staticmethod
@@ -265,7 +276,7 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "Активовано: Ваш голос тепер рахується подвійно",
-            "effect": "double_vote"
+            "effect": "double_vote",
         }
 
     @staticmethod
@@ -275,7 +286,7 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "Додано +1 місце в бункері",
-            "effect": "extra_bunker_slot"
+            "effect": "extra_bunker_slot",
         }
 
     @staticmethod
@@ -285,7 +296,7 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "Поставте запитання в чаті. Гравець повинен відповісти правду.",
-            "effect": "question_truth"
+            "effect": "question_truth",
         }
 
     @staticmethod
@@ -293,9 +304,12 @@ class SpecialConditionHandler:
         """Психолог: Змінити голос гравця"""
         source_id = params.get("source_player_id")
         target_id = params.get("target_player_id")
-        
+
         if not source_id or not target_id:
-            return {"success": False, "message": "Потрібен source_player_id та target_player_id"}
+            return {
+                "success": False,
+                "message": "Потрібен source_player_id та target_player_id",
+            }
 
         if game.phase != GamePhase.VOTING:
             return {"success": False, "message": "Тільки під час голосування"}
@@ -321,7 +335,7 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": f"Змінено голос гравця",
-            "effect": "change_vote"
+            "effect": "change_vote",
         }
 
     @staticmethod
@@ -342,7 +356,7 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "Голосування скасовано! Всі голоси обнулені.",
-            "effect": "cancel_voting_round"
+            "effect": "cancel_voting_round",
         }
 
     @staticmethod
@@ -352,7 +366,7 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "Активовано: При нічиї ви вирішуєте результат",
-            "effect": "tiebreaker"
+            "effect": "tiebreaker",
         }
 
     @staticmethod
@@ -362,7 +376,7 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "Можете погрожувати іншим гравцям. Блеф або правда - ваша справа.",
-            "effect": "intimidate"
+            "effect": "intimidate",
         }
 
     @staticmethod
@@ -372,10 +386,11 @@ class SpecialConditionHandler:
         if not target_id:
             return {"success": False, "message": "Потрібен target_player_id"}
 
-        target = db.query(Player).filter(
-            Player.id == target_id,
-            Player.game_id == game.id
-        ).first()
+        target = (
+            db.query(Player)
+            .filter(Player.id == target_id, Player.game_id == game.id)
+            .first()
+        )
 
         if not target:
             return {"success": False, "message": "Гравець не знайдений"}
@@ -388,7 +403,7 @@ class SpecialConditionHandler:
             "success": True,
             "message": f"Професії обмінано з {target.name}",
             "effect": "swap_profession",
-            "target_player_id": target_id
+            "target_player_id": target_id,
         }
 
     @staticmethod
@@ -397,16 +412,19 @@ class SpecialConditionHandler:
         target_id = params.get("target_player_id")
         card_type = params.get("card_type")
         guess = params.get("guess")
-        
+
         if not all([target_id, card_type, guess]):
-            return {"success": False, "message": "Потрібен target_player_id, card_type, guess"}
+            return {
+                "success": False,
+                "message": "Потрібен target_player_id, card_type, guess",
+            }
 
         target = db.query(Player).filter(Player.id == target_id).first()
         if not target:
             return {"success": False, "message": "Гравець не знайдений"}
 
         actual_value = getattr(target, card_type, None)
-        
+
         if guess.lower() == actual_value.lower():
             # Correct guess - reveal card
             if not target.revealed_cards:
@@ -414,21 +432,21 @@ class SpecialConditionHandler:
             if card_type not in target.revealed_cards:
                 target.revealed_cards.append(card_type)
                 flag_modified(target, "revealed_cards")
-            
+
             db.commit()
-            
+
             return {
                 "success": True,
                 "message": f"Правильно! {target.name} має {card_type}: {actual_value}",
                 "effect": "reveal_card",
-                "correct": True
+                "correct": True,
             }
         else:
             return {
                 "success": True,
                 "message": f"Неправильно. Картка не відкрита.",
                 "effect": "failed_guess",
-                "correct": False
+                "correct": False,
             }
 
     @staticmethod
@@ -438,24 +456,26 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "Передбачте результат голосування в чаті. Якщо вірно - +2 голоси наступного раунду.",
-            "effect": "predict_vote"
+            "effect": "predict_vote",
         }
 
     @staticmethod
     def _hacker(db: Session, game: Game, player: Player, params: Dict) -> Dict:
         """Хакер: Подивитись 3 закритих картки Бункера"""
-        if not game.bunker_cards or game.revealed_bunker_cards >= len(game.bunker_cards):
+        if not game.bunker_cards or game.revealed_bunker_cards >= len(
+            game.bunker_cards
+        ):
             return {"success": False, "message": "Всі картки бункера вже відкриті"}
 
         # Show next 3 unrevealed cards
-        unrevealed = game.bunker_cards[game.revealed_bunker_cards:]
+        unrevealed = game.bunker_cards[game.revealed_bunker_cards :]
         preview = unrevealed[:3]
 
         return {
             "success": True,
             "message": f"Хакер: Наступні картки бункера: {', '.join(preview)}",
             "effect": "preview_bunker",
-            "cards": preview
+            "cards": preview,
         }
 
     @staticmethod
@@ -465,34 +485,34 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "Організуйте альянс з 3 гравцями. Домовтесь голосувати разом.",
-            "effect": "alliance"
+            "effect": "alliance",
         }
 
     @staticmethod
     def _revolutionary(db: Session, game: Game, player: Player, params: Dict) -> Dict:
         """Революціонер: Перемішати всі закриті картки"""
         # This is VERY powerful - shuffle all unrevealed cards
-        players = db.query(Player).filter(
-            Player.game_id == game.id,
-            Player.status == PlayerStatus.PLAYING
-        ).all()
+        players = (
+            db.query(Player)
+            .filter(Player.game_id == game.id, Player.status == PlayerStatus.PLAYING)
+            .all()
+        )
 
         card_types = ["profession", "biology", "health", "hobby", "baggage", "fact"]
-        
+
         # Collect all unrevealed cards
         for card_type in card_types:
             unrevealed_players = [
-                p for p in players 
-                if card_type not in (p.revealed_cards or [])
+                p for p in players if card_type not in (p.revealed_cards or [])
             ]
-            
+
             if len(unrevealed_players) <= 1:
                 continue
-                
+
             # Shuffle card values
             values = [getattr(p, card_type) for p in unrevealed_players]
             random.shuffle(values)
-            
+
             for p, new_value in zip(unrevealed_players, values):
                 setattr(p, card_type, new_value)
 
@@ -501,7 +521,7 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "Революція! Всі закриті картки перемішано!",
-            "effect": "shuffle_cards"
+            "effect": "shuffle_cards",
         }
 
     @staticmethod
@@ -512,10 +532,13 @@ class SpecialConditionHandler:
             return {"success": False, "message": "Потрібен target_player_id"}
 
         # Store protected player
-        if not hasattr(player, 'special_data'):
+        if not hasattr(player, "special_data"):
             player.special_data = {}
-        
-        player.special_data = {"protected_player": target_id, "round": game.current_round}
+
+        player.special_data = {
+            "protected_player": target_id,
+            "round": game.current_round,
+        }
         flag_modified(player, "special_data")
         db.commit()
 
@@ -523,7 +546,7 @@ class SpecialConditionHandler:
             "success": True,
             "message": "Гравець захищений цей раунд. Його не можна вигнати.",
             "effect": "protect",
-            "target_player_id": target_id
+            "target_player_id": target_id,
         }
 
     @staticmethod
@@ -531,9 +554,12 @@ class SpecialConditionHandler:
         """Клон: Скопіювати відкриту картку"""
         target_id = params.get("target_player_id")
         card_type = params.get("card_type")
-        
+
         if not target_id or not card_type:
-            return {"success": False, "message": "Потрібен target_player_id та card_type"}
+            return {
+                "success": False,
+                "message": "Потрібен target_player_id та card_type",
+            }
 
         target = db.query(Player).filter(Player.id == target_id).first()
         if not target:
@@ -552,7 +578,7 @@ class SpecialConditionHandler:
             "success": True,
             "message": f"Скопійовано {card_type}: {card_value}",
             "effect": "copy_card",
-            "card_type": card_type
+            "card_type": card_type,
         }
 
     @staticmethod
@@ -568,15 +594,22 @@ class SpecialConditionHandler:
 
         # Swap 2 random unrevealed cards
         card_types = ["profession", "biology", "health", "hobby", "baggage", "fact"]
-        player_unrevealed = [c for c in card_types if c not in (player.revealed_cards or [])]
-        target_unrevealed = [c for c in card_types if c not in (target.revealed_cards or [])]
-        
+        player_unrevealed = [
+            c for c in card_types if c not in (player.revealed_cards or [])
+        ]
+        target_unrevealed = [
+            c for c in card_types if c not in (target.revealed_cards or [])
+        ]
+
         common = list(set(player_unrevealed) & set(target_unrevealed))
         if len(common) < 2:
-            return {"success": False, "message": "Недостатньо закритих карток для обміну"}
+            return {
+                "success": False,
+                "message": "Недостатньо закритих карток для обміну",
+            }
 
         swap_cards = random.sample(common, 2)
-        
+
         for card_type in swap_cards:
             player_val = getattr(player, card_type)
             target_val = getattr(target, card_type)
@@ -589,7 +622,7 @@ class SpecialConditionHandler:
             "success": True,
             "message": f"Обмінялись 2 картками з {target.name}",
             "effect": "swap_cards",
-            "cards": swap_cards
+            "cards": swap_cards,
         }
 
     @staticmethod
@@ -599,7 +632,7 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "При вигнанні гравця - отримаєте одну його картку",
-            "effect": "loot_eliminated"
+            "effect": "loot_eliminated",
         }
 
     @staticmethod
@@ -610,9 +643,9 @@ class SpecialConditionHandler:
             return {"success": False, "message": "Потрібен target_player_id"}
 
         # Store target (will be triggered on elimination)
-        if not hasattr(player, 'special_data'):
+        if not hasattr(player, "special_data"):
             player.special_data = {}
-        
+
         player.special_data = {"berserker_target": target_id}
         flag_modified(player, "special_data")
         db.commit()
@@ -621,7 +654,7 @@ class SpecialConditionHandler:
             "success": True,
             "message": "Обрано ціль. Якщо вас вигонять - він іде з вами.",
             "effect": "berserker_set",
-            "target_player_id": target_id
+            "target_player_id": target_id,
         }
 
     @staticmethod
@@ -631,7 +664,7 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "Після вигнання зможете голосувати ще 2 раунди",
-            "effect": "ghost_vote"
+            "effect": "ghost_vote",
         }
 
     @staticmethod
@@ -646,7 +679,7 @@ class SpecialConditionHandler:
             "success": True,
             "message": f"Сторона B: {side_b}",
             "effect": "view_catastrophe_b",
-            "side_b": side_b
+            "side_b": side_b,
         }
 
     @staticmethod
@@ -667,7 +700,7 @@ class SpecialConditionHandler:
             "success": True,
             "message": f"Картку {card_type} приховано назад",
             "effect": "hide_card",
-            "card_type": card_type
+            "card_type": card_type,
         }
 
     @staticmethod
@@ -678,10 +711,10 @@ class SpecialConditionHandler:
 
         # Take next bunker card
         next_card = game.bunker_cards[game.revealed_bunker_cards]
-        
-        if not hasattr(player, 'special_data'):
+
+        if not hasattr(player, "special_data"):
             player.special_data = {}
-        
+
         player.special_data = {"personal_bunker_card": next_card}
         flag_modified(player, "special_data")
         db.commit()
@@ -690,7 +723,7 @@ class SpecialConditionHandler:
             "success": True,
             "message": f"Картка бункера '{next_card}' тепер ваша особиста",
             "effect": "personal_bunker",
-            "card": next_card
+            "card": next_card,
         }
 
     @staticmethod
@@ -698,14 +731,14 @@ class SpecialConditionHandler:
         """Провокатор: Двоє голосують один за одного"""
         player1_id = params.get("player1_id")
         player2_id = params.get("player2_id")
-        
+
         if not player1_id or not player2_id:
             return {"success": False, "message": "Потрібен player1_id та player2_id"}
 
         # Store for voting phase
-        if not hasattr(player, 'special_data'):
+        if not hasattr(player, "special_data"):
             player.special_data = {}
-        
+
         player.special_data = {
             "forced_votes": {player1_id: player2_id, player2_id: player1_id}
         }
@@ -715,7 +748,7 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "Двоє гравців тепер повинні голосувати один за одного",
-            "effect": "force_votes"
+            "effect": "force_votes",
         }
 
     @staticmethod
@@ -730,7 +763,10 @@ class SpecialConditionHandler:
             return {"success": False, "message": "Гравець не знайдений"}
 
         if not target.special_used:
-            return {"success": False, "message": "Гравець ще не використав особливу умову"}
+            return {
+                "success": False,
+                "message": "Гравець ще не використав особливу умову",
+            }
 
         # Cancel their special
         target.special_used = False
@@ -740,7 +776,7 @@ class SpecialConditionHandler:
             "success": True,
             "message": f"Скасовано особливу умову {target.name}",
             "effect": "cancel_special",
-            "target_player_id": target_id
+            "target_player_id": target_id,
         }
 
     @staticmethod
@@ -750,13 +786,10 @@ class SpecialConditionHandler:
         return {
             "success": True,
             "message": "Запропонуйте обмін іншому гравцю в чаті",
-            "effect": "trade_offer"
+            "effect": "trade_offer",
         }
 
     @staticmethod
     def _neutral(db: Session, game: Game, player: Player, params: Dict) -> Dict:
         """Нейтральна зона: Немає особливої умови"""
-        return {
-            "success": False,
-            "message": "У вас немає особливої умови"
-        }
+        return {"success": False, "message": "У вас немає особливої умови"}

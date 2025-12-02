@@ -15,6 +15,8 @@ function gamePage(gameCode) {
         },
         players: [],
         messages: [],
+        gameLogs: [],  // Game event logs
+        logIdCounter: 0,
         myPlayer: null,
         myCharacter: {
             profession: null,
@@ -31,9 +33,20 @@ function gamePage(gameCode) {
         wsConnecting: false,
         wsReconnectAttempts: 0,
         timeRemaining: 0,
+        maxPhaseTime: 60,  // Default max time for timer circle
         timerInterval: null,
         leftSidebarOpen: false,
         rightSidebarOpen: false,
+        isPaused: false,
+        pausedTimeRemaining: 0,
+
+        // Max rounds based on player count
+        get maxRounds() {
+            const count = this.players.length;
+            if (count <= 4) return 3;
+            if (count <= 6) return 4;
+            return 5;
+        },
 
         async init() {
             await this.loadGameData();
@@ -48,6 +61,33 @@ function gamePage(gameCode) {
                     this.ws.close();
                 }
             });
+        },
+
+        // Add game log entry
+        addGameLog(message, type = 'info') {
+            this.gameLogs.push({
+                id: ++this.logIdCounter,
+                message: message,
+                type: type,
+                timestamp: new Date().toISOString()
+            });
+            // Keep only last 100 logs
+            if (this.gameLogs.length > 100) {
+                this.gameLogs.shift();
+            }
+            // Scroll to bottom
+            this.$nextTick(() => {
+                const logsContainer = this.$refs.gameLogs;
+                if (logsContainer) {
+                    logsContainer.scrollTop = logsContainer.scrollHeight;
+                }
+            });
+        },
+
+        formatLogTime(timestamp) {
+            if (!timestamp) return '';
+            const date = new Date(timestamp);
+            return date.toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
         },
 
         async loadGameData() {
@@ -177,6 +217,7 @@ function gamePage(gameCode) {
                     break;
                 case 'player_joined':
                     console.log('[WS] Player joined:', data.data?.player_name);
+                    this.addGameLog(`<strong>${data.data?.player_name}</strong> приєднався до гри`, 'join');
                     // Force reload game data to update player count
                     this.loadGameData().then(() => {
                         // Force Alpine reactivity
@@ -187,6 +228,7 @@ function gamePage(gameCode) {
                     break;
                 case 'player_left':
                     console.log('[WS] Player left');
+                    this.addGameLog('Гравець покинув гру', 'join');
                     this.loadGameData();
                     break;
                 case 'phase_change':
@@ -200,11 +242,29 @@ function gamePage(gameCode) {
                         this.game.current_round = data.data.current_round;
                     }
                     
+                    // Log phase change
+                    const phaseNames = {
+                        'lobby': 'Лобі',
+                        'bunker_reveal': '🏠 Відкриття бункера',
+                        'card_reveal': '🎴 Відкриття карток',
+                        'discussion': '💬 Обговорення',
+                        'voting': '🗳️ Голосування',
+                        'reveal': '📊 Результати',
+                        'ended': '🏁 Гра завершена'
+                    };
+                    if (oldPhase !== this.game.phase) {
+                        this.addGameLog(`Фаза: <strong>${phaseNames[this.game.phase] || this.game.phase}</strong>`, 'phase');
+                    }
+                    
                     console.log(`[WS] Phase changed from ${oldPhase} to ${this.game.phase}, round: ${this.game.current_round}, new end_time: ${this.game.phase_end_time}`);
                     
-                    // Reset advancing flag when phase changes
+                    // Reset advancing flag and pause when phase changes
                     this.isAdvancing = false;
                     this.timerExpiredAt = null;
+                    this.isPaused = false;
+                    
+                    // Update maxPhaseTime for timer circle
+                    this.updateMaxPhaseTime();
                     
                     this.startTimer(); // Restart timer with new phase_end_time
 
@@ -233,7 +293,27 @@ function gamePage(gameCode) {
                 case 'player_eliminated':
                     this.handlePlayerEliminated(data.data);
                     break;
+                case 'timer_paused':
+                    this.isPaused = data.data.paused;
+                    if (this.isPaused) {
+                        this.pausedTimeRemaining = this.timeRemaining;
+                        this.addGameLog('⏸️ Хост поставив гру на паузу', 'phase');
+                    } else {
+                        this.addGameLog('▶️ Гра продовжується', 'phase');
+                    }
+                    break;
             }
+        },
+
+        updateMaxPhaseTime() {
+            const phaseTimes = {
+                'bunker_reveal': 10,
+                'card_reveal': 60 * this.players.filter(p => p.status === 'playing').length,
+                'discussion': 60,
+                'voting': 30,
+                'reveal': 3
+            };
+            this.maxPhaseTime = phaseTimes[this.game.phase] || 60;
         },
 
         handleGameUpdate(data) {
@@ -265,6 +345,7 @@ function gamePage(gameCode) {
 
         handleBunkerCardRevealed(data) {
             this.game.revealed_bunker_cards = data.revealed_count;
+            this.addGameLog(`Відкрито картку бункера #${data.revealed_count}`, 'reveal');
             // Add animation to bunker card
             const cardEl = document.querySelector(`.bunker-card-${data.revealed_count - 1}`);
             if (cardEl) {
@@ -279,6 +360,16 @@ function gamePage(gameCode) {
                 if (!player.revealed_cards) player.revealed_cards = [];
                 if (!player.revealed_cards.includes(data.card_type)) {
                     player.revealed_cards.push(data.card_type);
+                    
+                    const cardNames = {
+                        'profession': 'Професію',
+                        'biology': 'Біологію',
+                        'health': 'Здоров\'я',
+                        'hobby': 'Хобі',
+                        'baggage': 'Багаж',
+                        'fact': 'Факт'
+                    };
+                    this.addGameLog(`<strong>${player.name}</strong> відкрив ${cardNames[data.card_type] || data.card_type}`, 'reveal');
 
                     // Update card value
                     if (data.card_value) {
@@ -305,7 +396,7 @@ function gamePage(gameCode) {
         },
 
         handleSpecialCardUsed(data) {
-            alert(`${data.player_name} використав особливу умову: ${data.special_name}`);
+            this.addGameLog(`<strong>${data.player_name}</strong> використав особливу умову: ${data.special_name}`, 'special');
             this.loadGameData();
         },
 
@@ -315,6 +406,11 @@ function gamePage(gameCode) {
             Object.keys(data).forEach(playerId => {
                 const player = this.players.find(p => p.id === parseInt(playerId));
                 if (player) {
+                    // Log if someone just voted (has_voted changed to true)
+                    if (data[playerId].has_voted && !player.has_voted) {
+                        this.addGameLog(`<strong>${player.name}</strong> проголосував`, 'vote');
+                    }
+                    
                     player.votes_received = data[playerId].votes_received;
                     player.has_voted = data[playerId].has_voted;
                     
@@ -339,8 +435,7 @@ function gamePage(gameCode) {
                 player.status = 'eliminated';
                 player.revealed_cards = data.revealed_cards || ['profession', 'biology', 'health', 'hobby', 'baggage', 'fact'];
                 
-                // Show elimination notification
-                alert(`☠️ ${player.name} був(ла) вигнаний(а) з бункера!`);
+                this.addGameLog(`☠️ <strong>${player.name}</strong> був вигнаний з бункера!`, 'eliminate');
             }
             
             // Refresh game data to get latest state
@@ -658,6 +753,11 @@ function gamePage(gameCode) {
             // Small delay before starting timer to ensure phase_change is fully processed
             setTimeout(() => {
                 this.timerInterval = setInterval(() => {
+                    // Skip timer updates if paused
+                    if (this.isPaused) {
+                        return;
+                    }
+                    
                     if (this.game.phase_end_time) {
                         // Fix for UTC time parsing: ensure 'Z' is present
                         const timeStr = this.game.phase_end_time.endsWith('Z')
@@ -759,6 +859,32 @@ function gamePage(gameCode) {
 
             if (confirm('Пропустити поточну фазу та перейти до наступної?')) {
                 await this.advancePhase();
+            }
+        },
+
+        async togglePause() {
+            if (!this.isHost) {
+                alert('Тільки хост може ставити гру на паузу!');
+                return;
+            }
+
+            this.isPaused = !this.isPaused;
+            
+            if (this.isPaused) {
+                this.pausedTimeRemaining = this.timeRemaining;
+                this.addGameLog('⏸️ Гра на паузі', 'phase');
+            } else {
+                this.addGameLog('▶️ Гра продовжується', 'phase');
+                // Extend phase_end_time by the paused duration
+                // This is a client-side pause, so we just stop the timer from advancing
+            }
+            
+            // Broadcast pause state to other players via WebSocket
+            if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+                this.ws.send(JSON.stringify({
+                    type: 'pause_toggle',
+                    paused: this.isPaused
+                }));
             }
         },
 
