@@ -2,6 +2,7 @@
 
 from pydantic_settings import BaseSettings
 from typing import Optional
+from pydantic import field_validator
 
 
 class Settings(BaseSettings):
@@ -29,7 +30,7 @@ class Settings(BaseSettings):
     DISCUSSION_TIME_SECONDS: int = 180  # 3 minutes
     VOTING_TIME_SECONDS: int = 60
 
-    # CORS
+    # CORS - can be comma-separated string or list
     CORS_ORIGINS: list[str] = [
         "*",  # Allow all origins for flexibility
         "https://bunker.zelma4.me",
@@ -37,6 +38,15 @@ class Settings(BaseSettings):
         "http://localhost:8765",
         "http://localhost:8000",
     ]
+    
+    @field_validator('CORS_ORIGINS', mode='before')
+    @classmethod
+    def parse_cors_origins(cls, v):
+        """Parse CORS_ORIGINS from string or list"""
+        if isinstance(v, str):
+            # Split by comma and strip whitespace
+            return [origin.strip() for origin in v.split(',') if origin.strip()]
+        return v
 
     # Rate Limiting
     CHAT_RATE_LIMIT: int = 10  # messages per minute
