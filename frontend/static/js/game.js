@@ -191,8 +191,11 @@ function gamePage(gameCode) {
                     break;
                 case 'phase_change':
                     console.log('[WS] Phase change received:', data.data);
+                    const oldPhase = this.game.phase;
                     this.game.phase = data.data.phase;
                     this.game.phase_end_time = data.data.phase_end_time;
+                    
+                    console.log(`[WS] Phase changed from ${oldPhase} to ${this.game.phase}, new end_time: ${this.game.phase_end_time}`);
                     
                     // Reset advancing flag when phase changes
                     this.isAdvancing = false;
@@ -207,7 +210,7 @@ function gamePage(gameCode) {
 
                     // Force Alpine.js to update by using $nextTick
                     this.$nextTick(() => {
-                        console.log('[WS] UI updated after phase change');
+                        console.log('[WS] UI updated after phase change to:', this.game.phase);
                     });
                     break;
                 case 'bunker_card_revealed':
@@ -564,6 +567,7 @@ function gamePage(gameCode) {
                         // Track when timer first expired
                         if (!this.timerExpiredAt) {
                             this.timerExpiredAt = Date.now();
+                            console.log('[TIMER] ⏰ Timer just expired! isHost:', this.isHost, 'myPlayer:', this.myPlayer?.name);
                         }
 
                         const secondsSinceExpired = (Date.now() - this.timerExpiredAt) / 1000;
@@ -575,9 +579,14 @@ function gamePage(gameCode) {
                             this.advancePhase();
                         } else if (secondsSinceExpired >= 3) {
                             // Fallback: if host hasn't advanced after 3 seconds, any player can do it
-                            console.log('[TIMER] ⏰ Host did not advance phase, fallback advancing...');
+                            console.log('[TIMER] ⏰ Host did not advance phase after 3s, fallback advancing...');
                             this.isAdvancing = true;
                             this.advancePhase();
+                        } else {
+                            // Log waiting for host
+                            if (Math.floor(secondsSinceExpired) !== Math.floor(secondsSinceExpired - 1)) {
+                                console.log(`[TIMER] Waiting for host... ${Math.floor(3 - secondsSinceExpired)}s until fallback`);
+                            }
                         }
                     }
                 } else {
@@ -592,33 +601,46 @@ function gamePage(gameCode) {
         },
 
         async advancePhase() {
+            console.log('[ADVANCE] advancePhase called, isAdvancing:', this.isAdvancing, 'gameId:', this.game.id);
+            
             // Prevent rapid double-clicks
             if (this.isAdvancing) {
-                console.log('Already advancing phase, please wait...');
+                console.log('[ADVANCE] Already advancing phase, please wait...');
                 return;
             }
 
             const gameId = this.game.id;
+            if (!gameId) {
+                console.error('[ADVANCE] No game ID!');
+                return;
+            }
+            
             this.isAdvancing = true;
+            console.log('[ADVANCE] Calling /api/games/' + gameId + '/advance-phase');
 
             try {
                 const response = await fetch(`/api/games/${gameId}/advance-phase`, {
                     method: 'POST'
                 });
 
+                console.log('[ADVANCE] Response status:', response.status);
+                
                 if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('[ADVANCE] Error response:', errorText);
                     throw new Error('Failed to advance phase');
                 }
 
-                // Phase will update via WebSocket
-                console.log('Phase advanced successfully');
+                const result = await response.json();
+                console.log('[ADVANCE] Phase advanced successfully, result:', result);
             } catch (err) {
-                console.error('Advance phase error:', err);
-                alert('Помилка при переході до наступної фази');
+                console.error('[ADVANCE] Advance phase error:', err);
+                // Don't show alert for every error, just log it
             } finally {
                 // Reset flag after delay to allow phase change to propagate
                 setTimeout(() => {
                     this.isAdvancing = false;
+                    console.log('[ADVANCE] isAdvancing reset to false');
                 }, 2000);
             }
         },
