@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Гра бункер - multiplayer apocalypse survival game">
+    <title>Гра бункер | Apocalypse Survival</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <link rel="alternate icon" href="/static/favicon.svg">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.0/dist/cdn.min.js"></script>
+
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+
+<body class="bg-bunker-dark text-gray-100 font-inter overflow-x-hidden">
+    <!-- Background effects -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse-slow"
+            style="animation-delay: 1s;"></div>
+    </div>
+
+    <div class="relative z-10" x-data="landingPage()">
+        <!-- Header -->
+        <header class="py-6 px-4 border-b border-red-900/30 backdrop-blur-sm">
+            <div class="container mx-auto flex justify-between items-center">
+                <h1
+                    class="text-3xl md:text-4xl font-orbitron font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-red-600">
+                    ГРА БУНКЕР
+                </h1>
+                <div class="text-sm text-gray-400">
+                    <span class="hidden md:inline">Apocalypse Survival</span> v1.0
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <main class="container mx-auto px-4 py-12 md:py-20">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <div class="mb-8 relative">
+                    <h2
+                        class="text-5xl md:text-7xl font-orbitron font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-500 animate-glow">
+                        ВИЖИВИ
+                    </h2>
+                    <p class="text-xl md:text-2xl text-gray-300 font-light">
+                        Апокаліпсис настав. Місця в бункері обмежені.
+                    </p>
+                </div>
+
+                <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Переконай інших, що саме ти заслуговуєш на порятунок.
+                    Отримай випадковий персонаж, обговорюй, голосуй та виживай!
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                    <button @click="showCreateModal = true" class="btn-primary px-8 py-4 text-lg font-semibold">
+                        <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Створити Гру
+                    </button>
+
+                    <button @click="showJoinModal = true" class="btn-secondary px-8 py-4 text-lg font-semibold">
+                        <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
+                            </path>
+                        </svg>
+                        Приєднатись
+                    </button>
+                </div>
+            </div>
+
+            <!-- Game Info Grid -->
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16">
+                <div class="game-card">
+                    <div class="text-red-500 mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-orbitron font-bold mb-2">4-16 Гравців</h3>
+                    <p class="text-gray-400">Зберіть команду друзів для епічної битви за виживання</p>
+                </div>
+
+                <div class="game-card">
+                    <div class="text-cyan-500 mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-orbitron font-bold mb-2">Реальний Час</h3>
+                    <p class="text-gray-400">Чат, голосування та обговорення в реальному часі</p>
+                </div>
+
+                <div class="game-card">
+                    <div class="text-orange-500 mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-orbitron font-bold mb-2">Унікальні Ролі</h3>
+                    <p class="text-gray-400">Випадкові професії, хвороби та особливі здібності</p>
+                </div>
+            </div>
+
+            <!-- Rules Section -->
+            <div class="max-w-3xl mx-auto">
+                <h3 class="text-3xl font-orbitron font-bold mb-6 text-center">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-500">
+                        Правила Гри
+                    </span>
+                </h3>
+
+                <div class="space-y-4">
+                    <div class="rule-item">
+                        <span class="rule-number">1</span>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-1">Отримай Персонажа</h4>
+                            <p class="text-gray-400">Кожен гравець отримує випадкову професію, стан здоров'я, хобі та
+                                особливу картку</p>
+                        </div>
+                    </div>
+
+                    <div class="rule-item">
+                        <span class="rule-number">2</span>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-1">Обговорення (3 хв)</h4>
+                            <p class="text-gray-400">Переконай інших, чому саме ти повинен вижити. Використовуй чат для
+                                аргументації</p>
+                        </div>
+                    </div>
+
+                    <div class="rule-item">
+                        <span class="rule-number">3</span>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-1">Голосування (1 хв)</h4>
+                            <p class="text-gray-400">Голосуй за гравця, якого хочеш виключити з бункера</p>
+                        </div>
+                    </div>
+
+                    <div class="rule-item">
+                        <span class="rule-number">4</span>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-1">Виключення</h4>
+                            <p class="text-gray-400">Гравець з найбільшою кількістю голосів виключається. Гра триває до
+                                останніх виживших</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Create Game Modal -->
+        <div x-show="showCreateModal" x-cloak class="modal-overlay" @click.self="showCreateModal = false">
+            <div class="modal-content max-w-2xl" @click.away="showCreateModal = false">
+                <h3
+                    class="text-2xl font-orbitron font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-500">
+                    Створити Гру
+                </h3>
+
+                <form @submit.prevent="createGame">
+                    <!-- Player Name -->
+                    <div class="mb-6">
+                        <label for="playerName" class="block text-sm font-semibold mb-2 text-gray-300">Ваше Ім'я</label>
+                        <input type="text" id="playerName" x-model="playerName" class="input-field"
+                            placeholder="Введіть ім'я..." required maxlength="50" autofocus>
+                    </div>
+
+                    <!-- Game Mode Selection -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-3 text-gray-300">Режим Гри</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" @click="gameMode = 'basic'"
+                                :class="gameMode === 'basic' ? 'mode-card-active' : 'mode-card'"
+                                class="p-4 rounded-lg border-2 transition-all duration-200">
+                                <div class="text-2xl mb-2">⚡</div>
+                                <div class="font-bold mb-1">Базовий</div>
+                                <div class="text-xs text-gray-400">Швидкий фінал після 5 раундів</div>
+                            </button>
+
+                            <button type="button" @click="gameMode = 'survival_story'"
+                                :class="gameMode === 'survival_story' ? 'mode-card-active' : 'mode-card'"
+                                class="p-4 rounded-lg border-2 transition-all duration-200">
+                                <div class="text-2xl mb-2">💀</div>
+                                <div class="font-bold mb-1">Історія Виживання</div>
+                                <div class="text-xs text-gray-400">З перевіркою виживання та загрозами</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Game Goal Selection -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-3 text-gray-300">Ціль Гри</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" @click="gameGoal = 'salvation'"
+                                :class="gameGoal === 'salvation' ? 'mode-card-active' : 'mode-card'"
+                                class="p-4 rounded-lg border-2 transition-all duration-200">
+                                <div class="text-2xl mb-2">🏃</div>
+                                <div class="font-bold mb-1">Порятунок</div>
+                                <div class="text-xs text-gray-400">Просто потрапити в бункер (до 7 гравців)</div>
+                            </button>
+
+                            <button type="button" @click="gameGoal = 'rebirth'"
+                                :class="gameGoal === 'rebirth' ? 'mode-card-active' : 'mode-card'"
+                                class="p-4 rounded-lg border-2 transition-all duration-200">
+                                <div class="text-2xl mb-2">👫</div>
+                                <div class="font-bold mb-1">Відродження</div>
+                                <div class="text-xs text-gray-400">Потрібна пара різної статі (8+ гравців)</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Info Text -->
+                    <div class="mb-6 p-4 bg-cyan-500/10 border border-cyan-500/30 rounded-lg">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div class="text-sm text-gray-300">
+                                <span class="font-semibold text-cyan-400"
+                                    x-text="gameMode === 'basic' ? 'Базовий режим:' : 'Історія виживання:'"></span>
+                                <span x-show="gameMode === 'basic'">5 раундів з голосуваннями, половина гравців
+                                    виживає.</span>
+                                <span x-show="gameMode === 'survival_story'">Після раундів кожен отримує картку загрози
+                                    - група вирішує, хто виживе.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button type="submit" class="btn-primary flex-1" :disabled="loading">
+                            <span x-show="!loading">Створити</span>
+                            <span x-show="loading">Створюємо...</span>
+                        </button>
+                        <button type="button" @click="showCreateModal = false" class="btn-secondary">
+                            Скасувати
+                        </button>
+                    </div>
+
+                    <div x-show="error" x-text="error" class="mt-4 text-red-400 text-sm"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Join Game Modal -->
+        <div x-show="showJoinModal" x-cloak class="modal-overlay" @click.self="showJoinModal = false">
+            <div class="modal-content" @click.away="showJoinModal = false">
+                <h3 class="text-2xl font-orbitron font-bold mb-6">Приєднатись до Гри</h3>
+
+                <form @submit.prevent="joinGame">
+                    <div class="mb-4">
+                        <label for="gameCode" class="block text-sm font-semibold mb-2 text-gray-300">Код Гри</label>
+                        <input type="text" id="gameCode" x-model="gameCode" class="input-field uppercase"
+                            placeholder="Введіть код (6 символів)..." required maxlength="6" autofocus>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="joinPlayerName" class="block text-sm font-semibold mb-2 text-gray-300">Ваше
+                            Ім'я</label>
+                        <input type="text" id="joinPlayerName" x-model="playerName" class="input-field"
+                            placeholder="Введіть ім'я..." required maxlength="50">
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button type="submit" class="btn-primary flex-1" :disabled="loading">
+                            <span x-show="!loading">Приєднатись</span>
+                            <span x-show="loading">Підключаємо...</span>
+                        </button>
+                        <button type="button" @click="showJoinModal = false" class="btn-secondary">
+                            Скасувати
+                        </button>
+                    </div>
+
+                    <div x-show="error" x-text="error" class="mt-4 text-red-400 text-sm"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/landing.js"></script>
+</body>
+
+</html>

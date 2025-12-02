@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гра бункер | {{ game_code }}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <link rel="alternate icon" href="/static/favicon.svg">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.0/dist/cdn.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+
+<body class="bg-bunker-dark text-gray-100 font-inter overflow-hidden">
+    <div class="h-screen flex flex-col" x-data="gamePage('{{ game_code }}')">
+        <!-- Mobile Sidebar Overlay -->
+        <div class="sidebar-overlay" 
+             :class="{ 'active': leftSidebarOpen || rightSidebarOpen }"
+             @click="leftSidebarOpen = false; rightSidebarOpen = false"></div>
+        
+        <!-- Mobile Menu Buttons -->
+        <button class="mobile-menu-btn mobile-menu-btn-left md:hidden" 
+                @click="leftSidebarOpen = !leftSidebarOpen"
+                aria-label="Toggle my cards">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        
+        <button class="mobile-menu-btn mobile-menu-btn-right md:hidden" 
+                @click="rightSidebarOpen = !rightSidebarOpen"
+                aria-label="Toggle chat">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+        </button>
+        
+        <!-- Header -->
+        <header class="bg-bunker-darker border-b border-red-900/30 px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <h1
+                        class="text-2xl font-orbitron font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">
+                        БУНКЕР
+                    </h1>
+                    <div class="hidden sm:flex items-center gap-2">
+                        <span class="text-gray-400 text-sm">Код:</span>
+                        <code
+                            class="px-3 py-1 bg-red-900/30 rounded text-lg font-mono font-bold text-red-400 border border-red-700/50"
+                            x-text="gameCode"></code>
+                        <button @click="copyCode" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Phase & Timer -->
+                <div class="flex items-center gap-4">
+                    <!-- Circular Timer -->
+                    <div x-show="timeRemaining > 0" class="circular-timer">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="54" class="circular-timer-circle-bg"></circle>
+                            <circle cx="60" cy="60" r="54" class="circular-timer-circle"
+                                :stroke-dasharray="`339.292 339.292`"
+                                :stroke-dashoffset="`${339.292 * (1 - timeRemaining / 180)}`"></circle>
+                        </svg>
+                        <div class="circular-timer-text" x-text="formatTime(timeRemaining)"></div>
+                    </div>
+
+                    <!-- Host Skip Button -->
+                    <div x-show="isHost && game.phase !== 'lobby' && timeRemaining > 0">
+                        <button @click="skipPhase" 
+                                :disabled="isAdvancing"
+                                class="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-lg transition-all duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                title="Пропустити фазу">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                            </svg>
+                            <span class="hidden sm:inline">SKIP</span>
+                        </button>
+                    </div>
+
+                    <div class="text-right">
+                        <div class="text-xs text-gray-400 uppercase tracking-wide" x-text="phaseText"></div>
+                        <div class="text-sm text-cyan-400">
+                            <span x-text="modeText"></span> | <span x-text="goalText"></span>
+                        </div>
+                    </div>
+
+                    <div x-show="game.phase === 'lobby' && isHost" class="ml-2">
+                        <button @click="startGame" :disabled="playerCount < 4" class="btn-primary text-sm py-2 px-4">
+                            Почати Гру
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Round indicator -->
+            <div x-show="game.current_round > 0" class="mt-2 text-center">
+                <span class="text-sm text-gray-400">Раунд</span>
+                <span class="text-lg font-orbitron font-bold text-orange-400 ml-2" x-text="game.current_round"></span>
+                <span class="text-sm text-gray-400 ml-1">/ 5</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex overflow-hidden">
+            <!-- Left Sidebar - My Cards -->
+            <aside class="w-72 bg-bunker-darker border-r border-red-900/30 overflow-y-auto"
+                   :class="{ 'open': leftSidebarOpen }">
+                <div class="p-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-orbitron font-bold">Мої Картки</h2>
+                        <button class="md:hidden text-gray-400 hover:text-white" 
+                                @click="leftSidebarOpen = false">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- My 6 Character Cards -->
+                    <div x-show="game.phase !== 'lobby'" class="space-y-3">
+                        <!-- Profession -->
+                        <div class="simple-card" style="border-color: #3b82f6; background: rgba(59, 130, 246, 0.1);"
+                            :class="{ 'opacity-50': !isCardRevealed('profession') }">
+                            <div class="simple-card-header">
+                                <span>🎭</span>
+                                <span>Професія</span>
+                                <span x-show="isCardRevealed('profession')" class="ml-auto text-green-400">✓ Відкрито</span>
+                            </div>
+                            <div class="simple-card-content" x-text="myCharacter.profession || 'Завантаження...'"></div>
+                            <button x-show="canRevealCard('profession')" @click="revealCard('profession')"
+                                class="btn-primary text-xs mt-2 w-full">Відкрити для всіх</button>
+                        </div>
+
+                        <!-- Biology -->
+                        <div class="simple-card" style="border-color: #10b981; background: rgba(16, 185, 129, 0.1);"
+                            :class="{ 'opacity-50': !isCardRevealed('biology') }">
+                            <div class="simple-card-header">
+                                <span>🧬</span>
+                                <span>Біологія</span>
+                                <span x-show="isCardRevealed('biology')" class="ml-auto text-green-400">✓ Відкрито</span>
+                            </div>
+                            <div class="simple-card-content" x-text="myCharacter.biology || 'Завантаження...'"></div>
+                            <button x-show="canRevealCard('biology')" @click="revealCard('biology')"
+                                class="btn-secondary text-xs mt-2 w-full">Відкрити для всіх</button>
+                        </div>
+
+                        <!-- Health -->
+                        <div class="simple-card" style="border-color: #ef4444; background: rgba(239, 68, 68, 0.1);"
+                            :class="{ 'opacity-50': !isCardRevealed('health') }">
+                            <div class="simple-card-header">
+                                <span>💊</span>
+                                <span>Здоров'я</span>
+                                <span x-show="isCardRevealed('health')" class="ml-auto text-green-400">✓ Відкрито</span>
+                            </div>
+                            <div class="simple-card-content" x-text="myCharacter.health || 'Завантаження...'"></div>
+                            <button x-show="canRevealCard('health')" @click="revealCard('health')"
+                                class="btn-secondary text-xs mt-2 w-full">Відкрити для всіх</button>
+                        </div>
+
+                        <!-- Hobby -->
+                        <div class="simple-card" style="border-color: #eab308; background: rgba(234, 179, 8, 0.1);"
+                            :class="{ 'opacity-50': !isCardRevealed('hobby') }">
+                            <div class="simple-card-header">
+                                <span>🎨</span>
+                                <span>Хобі</span>
+                                <span x-show="isCardRevealed('hobby')" class="ml-auto text-green-400">✓ Відкрито</span>
+                            </div>
+                            <div class="simple-card-content" x-text="myCharacter.hobby || 'Завантаження...'"></div>
+                            <button x-show="canRevealCard('hobby')" @click="revealCard('hobby')"
+                                class="btn-secondary text-xs mt-2 w-full">Відкрити для всіх</button>
+                        </div>
+
+                        <!-- Baggage -->
+                        <div class="simple-card" style="border-color: #92400e; background: rgba(146, 64, 14, 0.1);"
+                            :class="{ 'opacity-50': !isCardRevealed('baggage') }">
+                            <div class="simple-card-header">
+                                <span>🎒</span>
+                                <span>Багаж</span>
+                                <span x-show="isCardRevealed('baggage')" class="ml-auto text-green-400">✓ Відкрито</span>
+                            </div>
+                            <div class="simple-card-content" x-text="myCharacter.baggage || 'Завантаження...'"></div>
+                            <button x-show="canRevealCard('baggage')" @click="revealCard('baggage')"
+                                class="btn-secondary text-xs mt-2 w-full">Відкрити для всіх</button>
+                        </div>
+
+                        <!-- Fact -->
+                        <div class="simple-card" style="border-color: #a855f7; background: rgba(168, 85, 247, 0.1);"
+                            :class="{ 'opacity-50': !isCardRevealed('fact') }">
+                            <div class="simple-card-header">
+                                <span>📄</span>
+                                <span>Факт</span>
+                                <span x-show="isCardRevealed('fact')" class="ml-auto text-green-400">✓ Відкрито</span>
+                            </div>
+                            <div class="simple-card-content" x-text="myCharacter.fact || 'Завантаження...'">
+                            </div>
+                            <button x-show="canRevealCard('fact')" @click="revealCard('fact')"
+                                class="btn-secondary text-xs mt-2 w-full">Відкрити для всіх</button>
+                        </div>
+
+                        <!-- Special Condition -->
+                        <div class="simple-card" style="border-color: #f59e0b; background: rgba(245, 158, 11, 0.1);">
+                            <div class="simple-card-header">
+                                <span>⭐</span>
+                                <span>Особлива Умова</span>
+                            </div>
+                            <div class="simple-card-content text-sm"
+                                x-text="myCharacter.special_condition?.name || '???'"></div>
+                            <div x-show="myCharacter.special_condition" class="text-xs text-gray-400 mt-1"
+                                x-text="myCharacter.special_condition?.description"></div>
+                        </div>
+
+                        <!-- Threat Card (Survival Mode) -->
+                        <div x-show="game.mode === 'survival_story' && myCharacter.threat_card" class="simple-card"
+                            style="border-color: #7f1d1d; background: rgba(127, 29, 29, 0.2);">
+                            <div class="simple-card-header text-red-400">
+                                <span>⚠️</span>
+                                <span>Загроза</span>
+                            </div>
+                            <div class="simple-card-content text-sm"
+                                x-text="myCharacter.threat_card?.description || '???'"></div>
+                        </div>
+                    </div>
+
+                    <!-- Players List -->
+                    <div class="mt-6">
+                        <h3 class="text-sm font-bold mb-2 flex items-center justify-between">
+                            <span>Гравці</span>
+                            <span class="text-gray-400" x-text="`${playerCount}/16`"></span>
+                        </h3>
+
+                        <div class="space-y-2">
+                            <template x-for="player in players" :key="player.id">
+                                <div class="player-card text-xs" :class="{
+                                    'border-red-500/50 shake-animation': player.status === 'eliminated',
+                                    'border-green-500/50': player.status === 'survived',
+                                    'border-cyan-500/50': player.is_host
+                                }">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center font-bold text-white text-sm"
+                                                x-text="player.name.charAt(0).toUpperCase()"></div>
+                                            <div>
+                                                <div class="font-semibold" x-text="player.name"></div>
+                                                <div class="text-xs text-gray-400">
+                                                    <span x-show="player.is_host" class="text-cyan-400">👑</span>
+                                                    <span x-show="player.status === 'eliminated'"
+                                                        class="text-red-400">☠️</span>
+                                                    <span x-show="player.status === 'survived'"
+                                                        class="text-green-400">✓</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Vote button -->
+                                        <div
+                                            x-show="game.phase === 'voting' && player.status === 'playing' && !myPlayer.has_voted && player.id !== myPlayer.id">
+                                            <button @click="vote(player.id)" class="btn-vote">
+                                                Голос
+                                            </button>
+                                        </div>
+
+                                        <!-- Vote count -->
+                                        <div x-show="game.phase === 'voting' && player.votes_received > 0"
+                                            class="flex items-center gap-1 text-red-400">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z">
+                                                </path>
+                                            </svg>
+                                            <span x-text="player.votes_received"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Revealed Cards for Other Players -->
+                                    <div class="mt-2 space-y-1"
+                                        x-show="player.revealed_cards && player.revealed_cards.length > 0">
+                                        <template x-for="cardType in player.revealed_cards" :key="cardType">
+                                            <div class="bg-black/30 rounded px-2 py-1 text-[10px] text-gray-300 border border-gray-700 flex items-center gap-2"
+                                                :class="`player-${player.id}-card-${cardType}`">
+                                                <span x-text="cardType === 'profession' ? '🎭' : 
+                                                              cardType === 'biology' ? '🧬' : 
+                                                              cardType === 'health' ? '💊' : 
+                                                              cardType === 'hobby' ? '🎨' : 
+                                                              cardType === 'baggage' ? '🎒' : 
+                                                              cardType === 'fact' ? '📄' : ''"></span>
+                                                <span x-text="player[cardType]" class="truncate"></span>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center - Game Area -->
+            <main class="flex-1 overflow-y-auto p-6">
+                <!-- Lobby Phase -->
+                <div x-show="game.phase === 'lobby'" class="max-w-2xl mx-auto text-center py-12 fade-in">
+                    <h2
+                        class="text-4xl font-orbitron font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-500">
+                        Очікування Гравців
+                    </h2>
+                    <p class="text-gray-400 mb-8">Мінімум 4 гравці потрібно для початку гри</p>
+
+                    <div class="bg-bunker-darker border border-red-900/30 rounded-lg p-6 mb-6">
+                        <p class="text-gray-300 mb-2">Запросіть друзів за допомогою коду:</p>
+                        <div class="text-4xl font-orbitron font-black text-red-400 mb-4" x-text="gameCode"></div>
+                        <button @click="copyCode" class="btn-secondary">
+                            Копіювати Код
+                        </button>
+                    </div>
+
+                    <div x-show="isHost && playerCount >= 4" class="animate-bounce">
+                        <p class="text-cyan-400 font-semibold">Готові почати? Натисніть "Почати Гру" вгорі</p>
+                    </div>
+                </div>
+
+                <!-- Catastrophe & Bunker Cards -->
+                <div x-show="game.phase !== 'lobby' && game.phase !== 'ended'" class="max-w-5xl mx-auto mb-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Catastrophe -->
+                        <div x-show="game.catastrophe" class="fade-in">
+                            <h3 class="text-lg font-orbitron font-bold mb-3 text-red-400">☢️ Катастрофа</h3>
+                            <div class="simple-card" style="border-color: #000000; background: rgba(0, 0, 0, 0.5);">
+                                <div class="simple-card-header text-red-400">
+                                    <span x-text="game.catastrophe?.name"></span>
+                                </div>
+                                <div class="simple-card-content text-sm" x-text="game.catastrophe?.description"></div>
+                                <div class="text-xs text-gray-400 mt-2">
+                                    Тривалість: <span x-text="game.catastrophe?.duration"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bunker Cards -->
+                        <div x-show="game.bunker_cards?.length > 0" class="fade-in">
+                            <h3 class="text-lg font-orbitron font-bold mb-3 text-gray-400">🏠 Бункер (<span
+                                    x-text="game.revealed_bunker_cards"></span>/5)</h3>
+                            <div class="space-y-2">
+                                <template x-for="(card, index) in game.bunker_cards" :key="index">
+                                    <div x-show="index < game.revealed_bunker_cards"
+                                        class="simple-card bunker-card fade-in" :class="`bunker-card-${index}`"
+                                        style="border-color: #6b7280; background: rgba(107, 116, 128, 0.1);">
+                                        <div class="simple-card-content text-sm" x-text="card"></div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase Instructions -->
+                <div x-show="game.phase !== 'lobby' && game.phase !== 'ended'" class="text-center mb-6 fade-in">
+                    <div x-show="game.phase === 'bunker_reveal'" class="text-gray-400">
+                        <p class="text-xl font-semibold mb-2">🏠 Відкривання Бункера</p>
+                        <p>Дізнайтесь більше про ваше укриття...</p>
+                    </div>
+
+                    <div x-show="game.phase === 'card_reveal'" class="text-blue-400">
+                        <p class="text-xl font-semibold mb-2">🎴 Відкривання Карток</p>
+                        <p class="text-gray-400">Відкрийте одну зі своїх карток</p>
+                        <p x-show="game.current_round === 1" class="text-yellow-400 mt-2">⚠️ Раунд 1: Обов'язково
+                            відкрийте Професію!</p>
+                    </div>
+
+                    <div x-show="game.phase === 'discussion'" class="text-cyan-400">
+                        <p class="text-xl font-semibold mb-2">💬 Фаза Обговорення</p>
+                        <p class="text-gray-400">Переконай інших у своїй цінності для бункера!</p>
+                    </div>
+
+                    <div x-show="game.phase === 'voting'" class="text-orange-400">
+                        <p class="text-xl font-semibold mb-2">🗳️ Фаза Голосування</p>
+                        <p class="text-gray-400">Голосуй за гравця, якого хочеш виключити</p>
+                        <p x-show="myPlayer.has_voted" class="text-green-400 mt-2">✓ Ви проголосували</p>
+                    </div>
+
+                    <div x-show="game.phase === 'reveal'" class="text-red-400">
+                        <p class="text-xl font-semibold mb-2">📊 Результати</p>
+                        <p class="text-gray-400">Підрахунок голосів...</p>
+                    </div>
+
+                    <div x-show="game.phase === 'survival_check'" class="text-purple-400">
+                        <p class="text-xl font-semibold mb-2">⚠️ Перевірка Виживання</p>
+                        <p class="text-gray-400">Чи зможете ви впоратися з загрозами?</p>
+                    </div>
+                </div>
+
+                <!-- Game Ended -->
+                <div x-show="game.phase === 'ended'" class="max-w-2xl mx-auto text-center py-12 fade-in">
+                    <h2
+                        class="text-5xl font-orbitron font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-500">
+                        ГРА ЗАВЕРШЕНА
+                    </h2>
+
+                    <div class="bg-bunker-darker border border-green-900/30 rounded-lg p-8 mb-6">
+                        <h3 class="text-2xl font-bold mb-4 text-green-400">🎉 Виживші</h3>
+                        <div class="space-y-2">
+                            <template x-for="player in players.filter(p => p.status === 'survived')" :key="player.id">
+                                <div class="text-xl font-semibold" x-text="player.name"></div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <button @click="window.location.href = '/'" class="btn-primary">
+                        Нова Гра
+                    </button>
+                </div>
+            </main>
+
+            <!-- Right Sidebar - Chat -->
+            <aside class="w-80 bg-bunker-darker border-l border-red-900/30 flex flex-col"
+                   :class="{ 'open': rightSidebarOpen }">
+                <div class="p-4 border-b border-red-900/30 flex items-center justify-between">
+                    <h2 class="text-lg font-orbitron font-bold">Чат</h2>
+                    <button class="md:hidden text-gray-400 hover:text-white" 
+                            @click="rightSidebarOpen = false">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Messages -->
+                <div class="flex-1 overflow-y-auto p-4 space-y-2" x-ref="chatMessages">
+                    <template x-for="msg in messages" :key="msg.id || msg.timestamp">
+                        <div class="chat-message fade-in">
+                            <div class="flex items-start gap-2">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center text-xs font-bold flex-shrink-0"
+                                    x-text="msg.player_name.charAt(0).toUpperCase()"></div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-baseline gap-2 mb-1">
+                                        <span class="font-semibold text-sm" x-text="msg.player_name"></span>
+                                        <span class="text-xs text-gray-500"
+                                            x-text="formatTimestamp(msg.timestamp)"></span>
+                                    </div>
+                                    <p class="text-gray-300 text-sm break-words" x-text="msg.message"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Message Input -->
+                <div class="p-4 border-t border-red-900/30">
+                    <form @submit.prevent="sendMessage" class="flex gap-2">
+                        <input type="text" x-model="chatMessage" class="input-field flex-1"
+                            placeholder="Введіть повідомлення..." maxlength="500">
+                        <button type="submit" class="btn-primary px-4" :disabled="!chatMessage.trim()">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="/static/js/card-templates.js"></script>
+    <script src="/static/js/game.js"></script>
+</body>
+
+</html>
