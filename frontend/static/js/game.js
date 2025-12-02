@@ -104,7 +104,11 @@ function gamePage(gameCode) {
             this.ws = new WebSocket(wsUrl);
 
             this.ws.onopen = () => {
-                console.log('WebSocket connected');
+                console.log('[WS] WebSocket connected');
+                // Request fresh game state when reconnecting
+                if (this.ws.readyState === WebSocket.OPEN) {
+                    this.ws.send(JSON.stringify({ type: 'request_update' }));
+                }
             };
 
             this.ws.onmessage = (event) => {
@@ -113,13 +117,17 @@ function gamePage(gameCode) {
             };
 
             this.ws.onerror = (error) => {
-                console.error('WebSocket error:', error);
+                console.error('[WS] WebSocket error:', error);
             };
 
             this.ws.onclose = () => {
-                console.log('WebSocket disconnected');
+                console.log('[WS] WebSocket disconnected - reconnecting in 3s...');
                 // Reconnect after 3 seconds
-                setTimeout(() => this.connectWebSocket(), 3000);
+                setTimeout(() => {
+                    if (!this.ws || this.ws.readyState === WebSocket.CLOSED) {
+                        this.connectWebSocket();
+                    }
+                }, 3000);
             };
         },
 
@@ -134,9 +142,11 @@ function gamePage(gameCode) {
                     this.handleChatMessage(data.data);
                     break;
                 case 'player_joined':
+                    console.log('[WS] Player joined');
                     this.loadGameData();
                     break;
                 case 'player_left':
+                    console.log('[WS] Player left');
                     this.loadGameData();
                     break;
                 case 'phase_change':
@@ -144,7 +154,16 @@ function gamePage(gameCode) {
                     this.game.phase = data.data.phase;
                     this.game.phase_end_time = data.data.phase_end_time;
                     this.startTimer(); // Restart timer with new phase_end_time
-                    this.loadGameData();
+                    
+                    // Reload character data if game started
+                    if (this.game.phase !== 'lobby') {
+                        this.loadMyCharacter();
+                    }
+                    
+                    // Force Alpine.js to update by using $nextTick
+                    this.$nextTick(() => {
+                        console.log('[WS] UI updated after phase change');
+                    });
                     break;
                 case 'bunker_card_revealed':
                     this.handleBunkerCardRevealed(data.data);
@@ -235,12 +254,19 @@ function gamePage(gameCode) {
         },
 
         handleVoteUpdate(data) {
-            // Update vote counts
+            console.log('[WS] Vote update received:', data);
+            // Update vote counts for all players
             Object.keys(data).forEach(playerId => {
                 const player = this.players.find(p => p.id === parseInt(playerId));
                 if (player) {
-                    player.votes_received = data[playerId];
+                    player.votes_received = data[playerId].votes_received;
+                    player.has_voted = data[playerId].has_voted;
                 }
+            });
+            
+            // Force Alpine.js reactivity
+            this.$nextTick(() => {
+                console.log('[WS] Votes updated in UI');
             });
         },
 

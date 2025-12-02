@@ -274,6 +274,22 @@ async def vote(
             detail="Cannot vote now or already voted",
         )
 
+    # Broadcast vote update via WebSocket
+    from ..websockets.connection_manager import manager
+    
+    # Get updated vote counts
+    players = db.query(Player).filter(Player.game_id == game_id).all()
+    votes = {
+        p.id: {
+            "name": p.name,
+            "votes_received": p.votes_received,
+            "has_voted": p.has_voted
+        }
+        for p in players
+    }
+    
+    await manager.send_vote_update(game_id, votes)
+
     return {"message": "Vote registered"}
 
 
