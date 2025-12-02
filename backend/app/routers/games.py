@@ -229,6 +229,9 @@ async def start_game(game_id: int, request: Request, db: Session = Depends(get_d
     # Refresh game to get updated data
     db.refresh(game)
 
+    # Log phase and timer info
+    print(f"DEBUG: Game started - phase={game.phase.value}, phase_end_time={game.phase_end_time}")
+
     # Broadcast game started via WebSocket
     from ..websockets.connection_manager import manager
 

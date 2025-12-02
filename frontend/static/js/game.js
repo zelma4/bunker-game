@@ -373,13 +373,22 @@ function gamePage(gameCode) {
                     const diff = Math.max(0, Math.floor((endTime - now) / 1000));
                     this.timeRemaining = diff;
 
+                    // Debug logging for timer
+                    if (this.game.phase === 'bunker_reveal') {
+                        console.log(`[TIMER] Phase: ${this.game.phase}, Remaining: ${diff}s, isHost: ${this.isHost}, isAdvancing: ${this.isAdvancing}`);
+                    }
+
                     // Auto-advance phase when timer expires
                     if (diff === 0 && this.isHost && !this.isAdvancing) {
+                        console.log('[TIMER] Time expired! Auto-advancing phase...');
                         this.isAdvancing = true;
                         this.advancePhase();
                     }
                 } else {
                     this.timeRemaining = 0;
+                    if (this.game.phase === 'bunker_reveal') {
+                        console.log('[TIMER] No phase_end_time set for bunker_reveal phase!');
+                    }
                 }
             }, 1000);
         },
