@@ -266,8 +266,12 @@ class GameService:
         return True
 
     @staticmethod
-    def advance_phase(db: Session, game_id: int) -> Optional[GamePhase]:
-        """Advance to the next game phase"""
+    def advance_phase(db: Session, game_id: int) -> Optional[dict]:
+        """Advance to the next game phase
+        
+        Returns:
+            dict with 'phase' and optionally 'eliminated_player' info
+        """
         game = db.query(Game).filter(Game.id == game_id).first()
 
         if not game:
@@ -280,6 +284,8 @@ class GameService:
         )
 
         total_players = len(db.query(Player).filter(Player.game_id == game_id).all())
+        
+        result = {"phase": None, "eliminated_player": None}
 
         if game.phase == GamePhase.BUNKER_REVEAL:
             # Reveal bunker card and move to card reveal phase
@@ -313,6 +319,13 @@ class GameService:
         elif game.phase == GamePhase.REVEAL:
             # Eliminate player and check if game should end
             eliminated = GameService.eliminate_player(db, game_id)
+            
+            if eliminated:
+                result["eliminated_player"] = {
+                    "id": eliminated.id,
+                    "name": eliminated.name,
+                    "revealed_cards": eliminated.revealed_cards
+                }
 
             # Reset votes for next round
             for player in players:
@@ -324,13 +337,20 @@ class GameService:
 
         db.commit()
         db.refresh(game)
-        return game.phase
+        result["phase"] = game.phase
+        return result
 
     @staticmethod
     def _next_round(db: Session, game: Game, players: List[Player], total_players: int):
         """Move to next round or end game"""
         alive_count = len([p for p in players if p.status == PlayerStatus.PLAYING])
         bunker_capacity = get_bunker_capacity(total_players)
+        
+        # Reset votes for all players when moving to next round
+        for player in players:
+            player.votes_received = 0
+            player.has_voted = False
+            player.voted_for = None
 
         if alive_count <= bunker_capacity or game.current_round >= 5:
             # Game over - move to survival check or end
@@ -404,12 +424,20 @@ class GameService:
 
         # Find player(s) with most votes
         max_votes = max(p.votes_received for p in players)
+        
+        # Don't eliminate anyone if no votes were cast
+        if max_votes == 0:
+            print(f"DEBUG: No votes cast, no elimination for game {game_id}")
+            return None
+            
         candidates = [p for p in players if p.votes_received == max_votes]
+        print(f"DEBUG: Elimination candidates for game {game_id}: {[c.name for c in candidates]}, max_votes: {max_votes}")
 
         # If tie, random choice
         eliminated = random.choice(candidates) if candidates else None
 
         if eliminated:
+            print(f"DEBUG: Eliminating player {eliminated.name} with {max_votes} votes")
             eliminated.status = PlayerStatus.ELIMINATED
             # Reveal all cards except special condition
             all_cards = ["profession", "biology", "health", "hobby", "baggage", "fact"]

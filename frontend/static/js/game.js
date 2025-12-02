@@ -225,6 +225,9 @@ function gamePage(gameCode) {
                 case 'vote_update':
                     this.handleVoteUpdate(data.data);
                     break;
+                case 'player_eliminated':
+                    this.handlePlayerEliminated(data.data);
+                    break;
             }
         },
 
@@ -309,6 +312,12 @@ function gamePage(gameCode) {
                 if (player) {
                     player.votes_received = data[playerId].votes_received;
                     player.has_voted = data[playerId].has_voted;
+                    
+                    // Also update myPlayer if this is the current player
+                    if (this.myPlayer && player.id === this.myPlayer.id) {
+                        this.myPlayer.votes_received = data[playerId].votes_received;
+                        this.myPlayer.has_voted = data[playerId].has_voted;
+                    }
                 }
             });
 
@@ -316,6 +325,21 @@ function gamePage(gameCode) {
             this.$nextTick(() => {
                 console.log('[WS] Votes updated in UI');
             });
+        },
+
+        handlePlayerEliminated(data) {
+            console.log('[WS] Player eliminated:', data);
+            const player = this.players.find(p => p.id === data.player_id);
+            if (player) {
+                player.status = 'eliminated';
+                player.revealed_cards = data.revealed_cards || ['profession', 'biology', 'health', 'hobby', 'baggage', 'fact'];
+                
+                // Show elimination notification
+                alert(`☠️ ${player.name} був(ла) вигнаний(а) з бункера!`);
+            }
+            
+            // Refresh game data to get latest state
+            this.loadGameData();
         },
 
         async sendMessage() {

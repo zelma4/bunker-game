@@ -156,6 +156,22 @@ class ConnectionManager:
             },
         )
 
+    async def send_player_eliminated(
+        self, game_id: int, player_id: int, player_name: str, revealed_cards: list
+    ):
+        """Notify that a player was eliminated"""
+        await self.broadcast_to_game(
+            game_id,
+            {
+                "type": "player_eliminated",
+                "data": {
+                    "player_id": player_id,
+                    "player_name": player_name,
+                    "revealed_cards": revealed_cards,
+                },
+            },
+        )
+
 
 # Global connection manager instance
 manager = ConnectionManager()

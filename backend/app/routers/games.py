@@ -317,9 +317,9 @@ async def advance_phase(game_id: int, db: Session = Depends(get_db)):
     
     _last_phase_advance[game_id] = now
     
-    new_phase = GameService.advance_phase(db, game_id)
+    result = GameService.advance_phase(db, game_id)
 
-    if not new_phase:
+    if not result:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Game not found"
         )
@@ -329,6 +329,16 @@ async def advance_phase(game_id: int, db: Session = Depends(get_db)):
 
     # Broadcast phase change via WebSocket
     from ..websockets.connection_manager import manager
+
+    # Send elimination notification first (if any)
+    if result.get("eliminated_player"):
+        eliminated = result["eliminated_player"]
+        await manager.send_player_eliminated(
+            game_id,
+            eliminated["id"],
+            eliminated["name"],
+            eliminated["revealed_cards"]
+        )
 
     await manager.send_phase_change(
         game_id,
@@ -340,7 +350,7 @@ async def advance_phase(game_id: int, db: Session = Depends(get_db)):
     if game.phase == GamePhase.CARD_REVEAL:
         await manager.send_bunker_card_revealed(game_id, game.revealed_bunker_cards)
 
-    return {"phase": new_phase}
+    return {"phase": result["phase"].value if hasattr(result["phase"], 'value') else result["phase"]}
 
 
 @router.get("/{game_id}/my-character", response_model=CharacterTraits)

@@ -46,7 +46,8 @@ def get_votings_for_round(player_count: int, round_num: int) -> int:
     if round_num < 1 or round_num > 5:
         raise ValueError(f"Invalid round number: {round_num}. Must be between 1 and 5")
 
-    return ROUNDS_TABLE[player_count][round_num]
+    # round_num is 1-indexed, but list is 0-indexed
+    return ROUNDS_TABLE[player_count][round_num - 1]
 
 
 def get_total_eliminations(player_count: int) -> int:
