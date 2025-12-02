@@ -195,7 +195,12 @@ function gamePage(gameCode) {
                     this.game.phase = data.data.phase;
                     this.game.phase_end_time = data.data.phase_end_time;
                     
-                    console.log(`[WS] Phase changed from ${oldPhase} to ${this.game.phase}, new end_time: ${this.game.phase_end_time}`);
+                    // Update current_round if provided
+                    if (data.data.current_round !== undefined && data.data.current_round !== null) {
+                        this.game.current_round = data.data.current_round;
+                    }
+                    
+                    console.log(`[WS] Phase changed from ${oldPhase} to ${this.game.phase}, round: ${this.game.current_round}, new end_time: ${this.game.phase_end_time}`);
                     
                     // Reset advancing flag when phase changes
                     this.isAdvancing = false;
@@ -435,6 +440,71 @@ function gamePage(gameCode) {
             }
         },
 
+        // Helper function to show player selection dialog
+        showPlayerSelect(title, excludeSelf = true) {
+            return new Promise((resolve) => {
+                const availablePlayers = this.players.filter(p => 
+                    p.status === 'playing' && (!excludeSelf || p.id !== this.myPlayer?.id)
+                );
+                
+                if (availablePlayers.length === 0) {
+                    alert('Немає доступних гравців для вибору');
+                    resolve(null);
+                    return;
+                }
+                
+                const options = availablePlayers.map(p => `${p.id}: ${p.name}`).join('\n');
+                const result = prompt(`${title}\n\nДоступні гравці:\n${options}\n\nВведіть номер гравця:`);
+                
+                if (result === null) {
+                    resolve(null);
+                    return;
+                }
+                
+                const playerId = parseInt(result);
+                const player = availablePlayers.find(p => p.id === playerId);
+                
+                if (!player) {
+                    alert('Невірний номер гравця');
+                    resolve(null);
+                    return;
+                }
+                
+                resolve(playerId);
+            });
+        },
+
+        // Helper function to show card type selection
+        showCardTypeSelect(title) {
+            return new Promise((resolve) => {
+                const cardTypes = [
+                    { value: 'profession', label: '🎭 Професія' },
+                    { value: 'biology', label: '🧬 Біологія' },
+                    { value: 'health', label: '💊 Здоров\'я' },
+                    { value: 'hobby', label: '🎨 Хобі' },
+                    { value: 'baggage', label: '🎒 Багаж' },
+                    { value: 'fact', label: '📄 Факт' }
+                ];
+                
+                const options = cardTypes.map((c, i) => `${i + 1}: ${c.label}`).join('\n');
+                const result = prompt(`${title}\n\n${options}\n\nВведіть номер (1-6):`);
+                
+                if (result === null) {
+                    resolve(null);
+                    return;
+                }
+                
+                const index = parseInt(result) - 1;
+                if (index < 0 || index >= cardTypes.length) {
+                    alert('Невірний вибір');
+                    resolve(null);
+                    return;
+                }
+                
+                resolve(cardTypes[index].value);
+            });
+        },
+
         async useSpecial() {
             const gameId = this.game.id;
             const special = this.myCharacter.special_condition;
@@ -462,47 +532,52 @@ function gamePage(gameCode) {
 
             try {
                 if (needsTarget.includes(specialName)) {
-                    const targetId = prompt('Введіть ID гравця (дивіться в списку гравців):');
+                    const targetId = await this.showPlayerSelect(`${specialName}\nОберіть гравця:`);
                     if (!targetId) return;
-                    params.target_player_id = parseInt(targetId);
+                    params.target_player_id = targetId;
                 }
 
                 if (specialName === 'Шпигун') {
-                    const targetId = prompt('ID гравця:');
-                    const cardType = prompt('Тип картки (profession/biology/health/hobby/baggage/fact):');
-                    if (!targetId || !cardType) return;
-                    params.target_player_id = parseInt(targetId);
+                    const targetId = await this.showPlayerSelect('Шпигун\nОберіть гравця для шпигування:');
+                    if (!targetId) return;
+                    const cardType = await this.showCardTypeSelect('Яку картку хочете побачити?');
+                    if (!cardType) return;
+                    params.target_player_id = targetId;
                     params.card_type = cardType;
                 }
 
                 if (specialName === 'Телепат') {
-                    const targetId = prompt('ID гравця:');
-                    const cardType = prompt('Тип картки:');
-                    const guess = prompt('Ваше припущення (текст):');
-                    if (!targetId || !cardType || !guess) return;
-                    params.target_player_id = parseInt(targetId);
+                    const targetId = await this.showPlayerSelect('Телепат\nОберіть гравця:');
+                    if (!targetId) return;
+                    const cardType = await this.showCardTypeSelect('Яку картку вгадуєте?');
+                    if (!cardType) return;
+                    const guess = prompt('Введіть ваше припущення (що написано на картці):');
+                    if (!guess) return;
+                    params.target_player_id = targetId;
                     params.card_type = cardType;
                     params.guess = guess;
                 }
 
                 if (specialName === 'Психолог') {
-                    const sourceId = prompt('ID гравця, чий голос змінити:');
-                    const targetId = prompt('ID нової цілі голосування:');
-                    if (!sourceId || !targetId) return;
-                    params.source_player_id = parseInt(sourceId);
-                    params.target_player_id = parseInt(targetId);
+                    const sourceId = await this.showPlayerSelect('Психолог\nОберіть гравця, чий голос змінити:');
+                    if (!sourceId) return;
+                    const targetId = await this.showPlayerSelect('Оберіть нову ціль голосування:');
+                    if (!targetId) return;
+                    params.source_player_id = sourceId;
+                    params.target_player_id = targetId;
                 }
 
                 if (specialName === 'Провокатор') {
-                    const player1 = prompt('ID першого гравця:');
-                    const player2 = prompt('ID другого гравця:');
-                    if (!player1 || !player2) return;
-                    params.player1_id = parseInt(player1);
-                    params.player2_id = parseInt(player2);
+                    const player1 = await this.showPlayerSelect('Провокатор\nОберіть першого гравця:');
+                    if (!player1) return;
+                    const player2 = await this.showPlayerSelect('Оберіть другого гравця:', true);
+                    if (!player2) return;
+                    params.player1_id = player1;
+                    params.player2_id = player2;
                 }
 
                 if (specialName === 'Ілюзіоніст') {
-                    const cardType = prompt('Яку картку приховати? (profession/biology/health/hobby/baggage/fact):');
+                    const cardType = await this.showCardTypeSelect('Ілюзіоніст\nЯку картку приховати?');
                     if (!cardType) return;
                     params.card_type = cardType;
                 }

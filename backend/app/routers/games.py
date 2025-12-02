@@ -246,6 +246,7 @@ async def start_game(game_id: int, request: Request, db: Session = Depends(get_d
         game_id,
         game.phase.value,
         game.phase_end_time.isoformat() if game.phase_end_time else None,
+        game.current_round,
     )
 
     return {"message": "Game started successfully"}
@@ -344,6 +345,7 @@ async def advance_phase(game_id: int, db: Session = Depends(get_db)):
         game_id,
         game.phase.value,
         game.phase_end_time.isoformat() if game.phase_end_time else None,
+        game.current_round,
     )
 
     # Also broadcast bunker card if it was revealed
