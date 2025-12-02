@@ -11,7 +11,9 @@ function gamePage(gameCode) {
             goal: 'salvation',
             catastrophe: null,
             bunker_cards: [],
-            revealed_bunker_cards: 0
+            revealed_bunker_cards: 0,
+            initial_player_count: 0,
+            bunker_capacity: null
         },
         players: [],
         messages: [],
@@ -106,7 +108,9 @@ function gamePage(gameCode) {
                     goal: data.goal || 'salvation',
                     catastrophe: data.catastrophe,
                     bunker_cards: data.bunker_cards || [],
-                    revealed_bunker_cards: data.revealed_bunker_cards || 0
+                    revealed_bunker_cards: data.revealed_bunker_cards || 0,
+                    initial_player_count: data.initial_player_count || data.players.length,
+                    bunker_capacity: data.bunker_capacity
                 };
                 this.players = data.players;
 
@@ -375,7 +379,8 @@ function gamePage(gameCode) {
                         'baggage': 'Багаж',
                         'fact': 'Факт'
                     };
-                    this.addGameLog(`<strong>${player.name}</strong> відкрив ${cardNames[data.card_type] || data.card_type}`, 'reveal');
+                    const cardValue = data.card_value ? `: <em>${data.card_value}</em>` : '';
+                    this.addGameLog(`<strong>${player.name}</strong> відкрив ${cardNames[data.card_type] || data.card_type}${cardValue}`, 'reveal');
 
                     // Update card value
                     if (data.card_value) {
@@ -917,6 +922,98 @@ function gamePage(gameCode) {
             
             const resultText = result === 'victory' ? '🏆 ПЕРЕМОГА!' : '💀 ПОРАЗКА';
             this.addGameLog(`Результат гри: <strong>${resultText}</strong>`, 'phase');
+        },
+
+        // Analyze survivors and recommend result
+        analyzeGameResult() {
+            const survivors = this.players.filter(p => p.status === 'survived');
+            const bunkerCapacity = this.game.bunker_capacity || Math.ceil(this.game.initial_player_count / 2);
+            
+            let reasons = {
+                positive: [],
+                negative: []
+            };
+            
+            // Check if we have right number of survivors
+            if (survivors.length === bunkerCapacity) {
+                reasons.positive.push(`✅ Кількість виживших (${survivors.length}) відповідає місткості бункера`);
+            } else if (survivors.length > bunkerCapacity) {
+                reasons.negative.push(`⚠️ Занадто багато виживших: ${survivors.length} з ${bunkerCapacity}`);
+            } else {
+                reasons.negative.push(`⚠️ Замало виживших: ${survivors.length} з ${bunkerCapacity}`);
+            }
+            
+            // Analyze survivor cards (if revealed)
+            let hasDoctor = false;
+            let hasEngineer = false;
+            let hasCriticalHealth = false;
+            let hasUsefulProfession = false;
+            let isFertile = false;
+            
+            for (const player of survivors) {
+                // Check profession
+                if (player.profession) {
+                    const prof = player.profession.toLowerCase();
+                    if (prof.includes('лікар') || prof.includes('медик') || prof.includes('хірург')) {
+                        hasDoctor = true;
+                        hasUsefulProfession = true;
+                    }
+                    if (prof.includes('інженер') || prof.includes('механік') || prof.includes('електрик')) {
+                        hasEngineer = true;
+                        hasUsefulProfession = true;
+                    }
+                    if (prof.includes('агроном') || prof.includes('фермер') || prof.includes('біолог')) {
+                        hasUsefulProfession = true;
+                    }
+                }
+                
+                // Check health
+                if (player.health) {
+                    const health = player.health.toLowerCase();
+                    if (health.includes('смертельн') || health.includes('термінал') || health.includes('невиліковн')) {
+                        hasCriticalHealth = true;
+                    }
+                }
+                
+                // Check biology for fertility
+                if (player.biology) {
+                    const bio = player.biology.toLowerCase();
+                    if (bio.includes('жінка') || bio.includes('чоловік')) {
+                        isFertile = true;
+                    }
+                    if (bio.includes('безплід') || bio.includes('стерильн')) {
+                        isFertile = false;
+                    }
+                }
+            }
+            
+            if (hasDoctor) reasons.positive.push('✅ Є медик/лікар серед виживших');
+            if (hasEngineer) reasons.positive.push('✅ Є інженер/механік серед виживших');
+            if (hasUsefulProfession) reasons.positive.push('✅ Корисні професії для виживання');
+            if (hasCriticalHealth) reasons.negative.push('❌ Є гравці зі смертельними хворобами');
+            
+            // Calculate recommendation
+            const positiveScore = reasons.positive.length;
+            const negativeScore = reasons.negative.length;
+            
+            let recommendation = 'neutral';
+            let confidence = 'low';
+            
+            if (positiveScore > negativeScore + 1) {
+                recommendation = 'victory';
+                confidence = positiveScore >= 3 ? 'high' : 'medium';
+            } else if (negativeScore > positiveScore + 1) {
+                recommendation = 'defeat';
+                confidence = negativeScore >= 3 ? 'high' : 'medium';
+            }
+            
+            return {
+                recommendation,
+                confidence,
+                reasons,
+                survivorCount: survivors.length,
+                bunkerCapacity
+            };
         },
 
         scrollChatToBottom() {

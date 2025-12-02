@@ -463,15 +463,48 @@
                     </div>
 
                     <!-- Host decides outcome -->
-                    <div x-show="isHost && !gameResult" class="mb-6 p-4 bg-bunker-dark border border-yellow-600/50 rounded-lg">
-                        <p class="text-yellow-400 font-semibold mb-4">🎯 Як хост, визначте результат гри:</p>
+                    <div x-show="isHost && !gameResult" class="mb-6 p-4 bg-bunker-dark border border-yellow-600/50 rounded-lg" x-data="{ analysis: null }" x-init="analysis = analyzeGameResult()">
+                        <p class="text-yellow-400 font-semibold mb-3">🎯 Як хост, визначте результат гри:</p>
+                        
+                        <!-- Auto analysis recommendation -->
+                        <div class="mb-4 p-3 rounded-lg text-sm"
+                            :class="{
+                                'bg-green-900/30 border border-green-600/50': analysis?.recommendation === 'victory',
+                                'bg-red-900/30 border border-red-600/50': analysis?.recommendation === 'defeat',
+                                'bg-gray-900/30 border border-gray-600/50': analysis?.recommendation === 'neutral'
+                            }">
+                            <div class="font-semibold mb-2"
+                                :class="{
+                                    'text-green-400': analysis?.recommendation === 'victory',
+                                    'text-red-400': analysis?.recommendation === 'defeat',
+                                    'text-gray-400': analysis?.recommendation === 'neutral'
+                                }">
+                                <span x-text="analysis?.recommendation === 'victory' ? '🎯 Рекомендація: ПЕРЕМОГА' : analysis?.recommendation === 'defeat' ? '🎯 Рекомендація: ПОРАЗКА' : '🎯 Результат неочевидний'"></span>
+                                <span class="text-xs opacity-75" x-text="analysis?.confidence ? `(${analysis.confidence === 'high' ? 'впевненість висока' : analysis.confidence === 'medium' ? 'середня впевненість' : 'низька впевненість'})` : ''"></span>
+                            </div>
+                            
+                            <div class="text-xs space-y-1">
+                                <div class="text-gray-400">
+                                    Виживших: <span class="text-white" x-text="analysis?.survivorCount"></span> / Місткість бункера: <span class="text-white" x-text="analysis?.bunkerCapacity"></span>
+                                </div>
+                                <template x-for="reason in analysis?.reasons?.positive || []" :key="reason">
+                                    <div class="text-green-400" x-text="reason"></div>
+                                </template>
+                                <template x-for="reason in analysis?.reasons?.negative || []" :key="reason">
+                                    <div class="text-red-400" x-text="reason"></div>
+                                </template>
+                            </div>
+                        </div>
+                        
                         <div class="flex justify-center gap-4">
                             <button @click="setGameResult('victory')" 
-                                class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-all flex items-center gap-2">
+                                class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-all flex items-center gap-2"
+                                :class="{ 'ring-2 ring-green-400 ring-offset-2 ring-offset-bunker-dark': analysis?.recommendation === 'victory' }">
                                 <span>🏆</span> ПЕРЕМОГА
                             </button>
                             <button @click="setGameResult('defeat')"
-                                class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all flex items-center gap-2">
+                                class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all flex items-center gap-2"
+                                :class="{ 'ring-2 ring-red-400 ring-offset-2 ring-offset-bunker-dark': analysis?.recommendation === 'defeat' }">
                                 <span>💀</span> ПОРАЗКА
                             </button>
                         </div>

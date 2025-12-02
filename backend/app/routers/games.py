@@ -19,6 +19,7 @@ from ..schemas import (
 )
 from ..models import Game, Player, GamePhase, PlayerStatus
 from ..services import GameService
+from ..game_logic import get_bunker_capacity
 
 router = APIRouter(prefix="/api/games", tags=["games"])
 
@@ -64,6 +65,8 @@ async def create_game(
         catastrophe=game.catastrophe,
         bunker_cards=game.bunker_cards,
         revealed_bunker_cards=game.revealed_bunker_cards,
+        initial_player_count=1,
+        bunker_capacity=None,  # Will be calculated when game starts
     )
 
     return response_data
@@ -117,6 +120,12 @@ async def join_game(
 
         player_responses.append(p_resp)
 
+    # Calculate initial_player_count and bunker_capacity
+    initial_player_count = len(players)
+    bunker_cap = (
+        get_bunker_capacity(initial_player_count) if initial_player_count >= 4 else None
+    )
+
     response_data = GameResponse(
         id=game.id,
         code=game.code,
@@ -130,6 +139,8 @@ async def join_game(
         catastrophe=game.catastrophe,
         bunker_cards=game.bunker_cards,
         revealed_bunker_cards=game.revealed_bunker_cards,
+        initial_player_count=initial_player_count,
+        bunker_capacity=bunker_cap,
     )
 
     # Broadcast player joined via WebSocket
@@ -182,6 +193,12 @@ async def get_game(game_code: str, request: Request, db: Session = Depends(get_d
 
         player_responses.append(p_resp)
 
+    # Calculate initial_player_count and bunker_capacity
+    initial_player_count = len(players)
+    bunker_cap = (
+        get_bunker_capacity(initial_player_count) if initial_player_count >= 4 else None
+    )
+
     response_data = GameResponse(
         id=game.id,
         code=game.code,
@@ -195,6 +212,8 @@ async def get_game(game_code: str, request: Request, db: Session = Depends(get_d
         catastrophe=game.catastrophe,
         bunker_cards=game.bunker_cards,
         revealed_bunker_cards=game.revealed_bunker_cards,
+        initial_player_count=initial_player_count,
+        bunker_capacity=bunker_cap,
     )
 
     return response_data

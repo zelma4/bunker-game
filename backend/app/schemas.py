@@ -90,6 +90,10 @@ class GameResponse(BaseModel):
     bunker_cards: Optional[List[str]] = None
     revealed_bunker_cards: int = 0
 
+    # Для автоматичного визначення результату
+    initial_player_count: Optional[int] = None
+    bunker_capacity: Optional[int] = None
+
     class Config:
         from_attributes = True
 
