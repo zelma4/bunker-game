@@ -77,7 +77,7 @@ class GameResponse(BaseModel):
     code: str
     phase: GamePhase
     current_round: int
-    phase_end_time: Optional[datetime] = None
+    phase_end_time: Optional[str] = None  # Changed to str to include 'Z' suffix
     player_count: int
     players: List[PlayerResponse] = []
 
@@ -92,6 +92,16 @@ class GameResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+    @validator("phase_end_time", pre=True, always=True)
+    def serialize_phase_end_time(cls, v):
+        if v is None:
+            return None
+        if isinstance(v, datetime):
+            return v.isoformat() + 'Z'
+        if isinstance(v, str) and not v.endswith('Z'):
+            return v + 'Z'
+        return v
 
 
 class ChatMessageCreate(BaseModel):

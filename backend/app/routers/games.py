@@ -245,7 +245,7 @@ async def start_game(game_id: int, request: Request, db: Session = Depends(get_d
     await manager.send_phase_change(
         game_id,
         game.phase.value,
-        game.phase_end_time.isoformat() if game.phase_end_time else None,
+        game.phase_end_time.isoformat() + 'Z' if game.phase_end_time else None,
         game.current_round,
     )
 
@@ -344,7 +344,7 @@ async def advance_phase(game_id: int, db: Session = Depends(get_db)):
     await manager.send_phase_change(
         game_id,
         game.phase.value,
-        game.phase_end_time.isoformat() if game.phase_end_time else None,
+        game.phase_end_time.isoformat() + 'Z' if game.phase_end_time else None,
         game.current_round,
     )
 

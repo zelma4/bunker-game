@@ -54,7 +54,7 @@ async def websocket_endpoint(
                 game_state = {
                     "phase": game.phase.value,
                     "current_round": game.current_round,
-                    "phase_end_time": game.phase_end_time.isoformat()
+                    "phase_end_time": game.phase_end_time.isoformat() + 'Z'
                     if game.phase_end_time
                     else None,
                     "players": [
