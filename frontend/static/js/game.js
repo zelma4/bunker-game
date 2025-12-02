@@ -575,12 +575,12 @@ function gamePage(gameCode) {
                         // Host advances immediately, others wait 3 seconds as fallback
                         if (this.isHost) {
                             console.log('[TIMER] ⏰ Time expired! Auto-advancing phase as host...');
-                            this.isAdvancing = true;
+                            // Don't set isAdvancing here - advancePhase() will do it
                             this.advancePhase();
                         } else if (secondsSinceExpired >= 3) {
                             // Fallback: if host hasn't advanced after 3 seconds, any player can do it
                             console.log('[TIMER] ⏰ Host did not advance phase after 3s, fallback advancing...');
-                            this.isAdvancing = true;
+                            // Don't set isAdvancing here - advancePhase() will do it
                             this.advancePhase();
                         } else {
                             // Log waiting for host

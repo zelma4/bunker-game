@@ -2,790 +2,125 @@ app-1  | INFO:     Started server process [1]
 app-1  | INFO:     Waiting for application startup.
 app-1  | INFO:     Application startup complete.
 app-1  | INFO:     Uvicorn running on http://0.0.0.0:8765 (Press CTRL+C to quit)
-app-1  | INFO:     ('172.21.0.1', 40044) - "WebSocket /ws/H7INXQ" [accepted]
-app-1  | INFO:     connection open
-app-1  | INFO:     ('172.21.0.1', 40052) - "WebSocket /ws/H7INXQ" [accepted]
-app-1  | INFO:     connection open
-app-1  | INFO:     ('172.21.0.1', 40070) - "WebSocket /ws/H7INXQ" [accepted]
-app-1  | INFO:     ('172.21.0.1', 40066) - "WebSocket /ws/H7INXQ" [accepted]
-app-1  | INFO:     connection open
-app-1  | INFO:     connection open
-app-1  | INFO:     ('172.21.0.1', 40084) - "WebSocket /ws/H7INXQ" [accepted]
-app-1  | INFO:     connection open
-app-1  | INFO:     connection closed
-app-1  | WebSocket error: (sqlite3.OperationalError) no such column: players.special_data
-app-1  | [SQL: SELECT players.id AS players_id, players.game_id AS players_game_id, players.session_id AS players_session_id, players.name AS players_name, players.status AS players_status, players.is_host AS players_is_host, players.profession AS players_profession, players.biology AS players_biology, players.health AS players_health, players.hobby AS players_hobby, players.baggage AS players_baggage, players.fact AS players_fact, players.special_condition AS players_special_condition, players.special_used AS players_special_used, players.special_data AS players_special_data, players.revealed_cards AS players_revealed_cards, players.threat_card AS players_threat_card, players.votes_received AS players_votes_received, players.has_voted AS players_has_voted, players.voted_for AS players_voted_for, players.joined_at AS players_joined_at 
-app-1  | FROM players 
-app-1  | WHERE players.game_id = ?]
-app-1  | [parameters: (1,)]
-app-1  | (Background on this error at: https://sqlalche.me/e/20/e3q8)
-app-1  | WebSocket error: (sqlite3.OperationalError) no such column: players.special_data
-app-1  | [SQL: SELECT players.id AS players_id, players.game_id AS players_game_id, players.session_id AS players_session_id, players.name AS players_name, players.status AS players_status, players.is_host AS players_is_host, players.profession AS players_profession, players.biology AS players_biology, players.health AS players_health, players.hobby AS players_hobby, players.baggage AS players_baggage, players.fact AS players_fact, players.special_condition AS players_special_condition, players.special_used AS players_special_used, players.special_data AS players_special_data, players.revealed_cards AS players_revealed_cards, players.threat_card AS players_threat_card, players.votes_received AS players_votes_received, players.has_voted AS players_has_voted, players.voted_for AS players_voted_for, players.joined_at AS players_joined_at 
-app-1  | FROM players 
-app-1  | WHERE players.game_id = ?]
-app-1  | [parameters: (1,)]
-app-1  | (Background on this error at: https://sqlalche.me/e/20/e3q8)
-app-1  | WebSocket error: (sqlite3.OperationalError) no such column: players.special_data
-app-1  | [SQL: SELECT players.id AS players_id, players.game_id AS players_game_id, players.session_id AS players_session_id, players.name AS players_name, players.status AS players_status, players.is_host AS players_is_host, players.profession AS players_profession, players.biology AS players_biology, players.health AS players_health, players.hobby AS players_hobby, players.baggage AS players_baggage, players.fact AS players_fact, players.special_condition AS players_special_condition, players.special_used AS players_special_used, players.special_data AS players_special_data, players.revealed_cards AS players_revealed_cards, players.threat_card AS players_threat_card, players.votes_received AS players_votes_received, players.has_voted AS players_has_voted, players.voted_for AS players_voted_for, players.joined_at AS players_joined_at 
-app-1  | FROM players 
-app-1  | WHERE players.game_id = ?]
-app-1  | [parameters: (1,)]
-app-1  | (Background on this error at: https://sqlalche.me/e/20/e3q8)
-app-1  | WebSocket error: (sqlite3.OperationalError) no such column: players.special_data
-app-1  | [SQL: SELECT players.id AS players_id, players.game_id AS players_game_id, players.session_id AS players_session_id, players.name AS players_name, players.status AS players_status, players.is_host AS players_is_host, players.profession AS players_profession, players.biology AS players_biology, players.health AS players_health, players.hobby AS players_hobby, players.baggage AS players_baggage, players.fact AS players_fact, players.special_condition AS players_special_condition, players.special_used AS players_special_used, players.special_data AS players_special_data, players.revealed_cards AS players_revealed_cards, players.threat_card AS players_threat_card, players.votes_received AS players_votes_received, players.has_voted AS players_has_voted, players.voted_for AS players_voted_for, players.joined_at AS players_joined_at 
-app-1  | FROM players 
-app-1  | WHERE players.game_id = ?]
-app-1  | [parameters: (1,)]
-app-1  | (Background on this error at: https://sqlalche.me/e/20/e3q8)
-app-1  | WebSocket error: (sqlite3.OperationalError) no such column: players.special_data
-app-1  | [SQL: SELECT players.id AS players_id, players.game_id AS players_game_id, players.session_id AS players_session_id, players.name AS players_name, players.status AS players_status, players.is_host AS players_is_host, players.profession AS players_profession, players.biology AS players_biology, players.health AS players_health, players.hobby AS players_hobby, players.baggage AS players_baggage, players.fact AS players_fact, players.special_condition AS players_special_condition, players.special_used AS players_special_used, players.special_data AS players_special_data, players.revealed_cards AS players_revealed_cards, players.threat_card AS players_threat_card, players.votes_received AS players_votes_received, players.has_voted AS players_has_voted, players.voted_for AS players_voted_for, players.joined_at AS players_joined_at 
-app-1  | FROM players 
-app-1  | WHERE players.game_id = ?]
-app-1  | [parameters: (1,)]
-app-1  | (Background on this error at: https://sqlalche.me/e/20/e3q8)
-app-1  | INFO:     172.21.0.1:50514 - "GET /game/H7INXQ HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:50520 - "GET /static/css/main.css HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:50536 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:50544 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47628 - "GET /game/9AMUMQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47636 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47646 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47660 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
 app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
-app-1  | INFO:     172.21.0.1:50560 - "GET /api/games/H7INXQ HTTP/1.1" 500 Internal Server Error
-app-1  | ERROR:    Exception in ASGI application
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlite3.OperationalError: no such column: players.special_data
-app-1  | 
-app-1  | The above exception was the direct cause of the following exception:
-app-1  | 
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
-app-1  |     result = await app(  # type: ignore[func-returns-value]
-app-1  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
-app-1  |     return await self.app(scope, receive, send)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
-app-1  |     await super().__call__(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
-app-1  |     await self.app(scope, receive, _send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 85, in __call__
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
-app-1  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
-app-1  |     await route.handle(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
-app-1  |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
-app-1  |     response = await f(request)
-app-1  |                ^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
-app-1  |     raw_response = await run_endpoint_function(
-app-1  |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
-app-1  |     return await dependant.call(**values)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/app/backend/app/routers/games.py", line 153, in get_game
-app-1  |     players = db.query(Player).filter(Player.game_id == game.id).all()
-app-1  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2673, in all
-app-1  |     return self._iter().all()  # type: ignore
-app-1  |            ^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2827, in _iter
-app-1  |     result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
-app-1  |                                                   ^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2362, in execute
-app-1  |     return self._execute_internal(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2247, in _execute_internal
-app-1  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
-app-1  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
-app-1  |     result = conn.execute(
-app-1  |              ^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
-app-1  |     return meth(
-app-1  |            ^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
-app-1  |     return connection._execute_clauseelement(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
-app-1  |     ret = self._execute_context(
-app-1  |           ^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
-app-1  |     return self._exec_single_context(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
-app-1  |     self._handle_dbapi_exception(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
-app-1  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: players.special_data
-app-1  | [SQL: SELECT players.id AS players_id, players.game_id AS players_game_id, players.session_id AS players_session_id, players.name AS players_name, players.status AS players_status, players.is_host AS players_is_host, players.profession AS players_profession, players.biology AS players_biology, players.health AS players_health, players.hobby AS players_hobby, players.baggage AS players_baggage, players.fact AS players_fact, players.special_condition AS players_special_condition, players.special_used AS players_special_used, players.special_data AS players_special_data, players.revealed_cards AS players_revealed_cards, players.threat_card AS players_threat_card, players.votes_received AS players_votes_received, players.has_voted AS players_has_voted, players.voted_for AS players_voted_for, players.joined_at AS players_joined_at 
-app-1  | FROM players 
-app-1  | WHERE players.game_id = ?]
-app-1  | [parameters: (1,)]
-app-1  | (Background on this error at: https://sqlalche.me/e/20/e3q8)
-app-1  | INFO:     172.21.0.1:50570 - "GET /static/favicon.svg HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:50574 - "GET / HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:50578 - "GET /static/js/landing.js HTTP/1.1" 304 Not Modified
-app-1  | INFO:     connection closed
-app-1  | INFO:     172.21.0.1:50580 - "GET /game/H7INXQ HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:50596 - "GET /static/css/main.css HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:50598 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:50600 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47690 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47674 - "GET /api/games/9AMUMQ HTTP/1.1" 404 Not Found
+app-1  | INFO:     172.21.0.1:47700 - "GET /game/9AMUMQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47704 - "GET / HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47718 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47722 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47734 - "GET /static/js/game.js HTTP/1.1" 200 OK
 app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
-app-1  | INFO:     172.21.0.1:50612 - "GET /api/games/H7INXQ HTTP/1.1" 500 Internal Server Error
-app-1  | ERROR:    Exception in ASGI application
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlite3.OperationalError: no such column: players.special_data
-app-1  | 
-app-1  | The above exception was the direct cause of the following exception:
-app-1  | 
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
-app-1  |     result = await app(  # type: ignore[func-returns-value]
-app-1  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
-app-1  |     return await self.app(scope, receive, send)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
-app-1  |     await super().__call__(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
-app-1  |     await self.app(scope, receive, _send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 85, in __call__
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
-app-1  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
-app-1  |     await route.handle(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
-app-1  |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
-app-1  |     response = await f(request)
-app-1  |                ^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
-app-1  |     raw_response = await run_endpoint_function(
-app-1  |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
-app-1  |     return await dependant.call(**values)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/app/backend/app/routers/games.py", line 153, in get_game
-app-1  |     players = db.query(Player).filter(Player.game_id == game.id).all()
-app-1  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2673, in all
-app-1  |     return self._iter().all()  # type: ignore
-app-1  |            ^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2827, in _iter
-app-1  |     result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
-app-1  |                                                   ^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2362, in execute
-app-1  |     return self._execute_internal(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2247, in _execute_internal
-app-1  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
-app-1  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
-app-1  |     result = conn.execute(
-app-1  |              ^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
-app-1  |     return meth(
-app-1  |            ^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
-app-1  |     return connection._execute_clauseelement(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
-app-1  |     ret = self._execute_context(
-app-1  |           ^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
-app-1  |     return self._exec_single_context(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
-app-1  |     self._handle_dbapi_exception(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
-app-1  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: players.special_data
-app-1  | [SQL: SELECT players.id AS players_id, players.game_id AS players_game_id, players.session_id AS players_session_id, players.name AS players_name, players.status AS players_status, players.is_host AS players_is_host, players.profession AS players_profession, players.biology AS players_biology, players.health AS players_health, players.hobby AS players_hobby, players.baggage AS players_baggage, players.fact AS players_fact, players.special_condition AS players_special_condition, players.special_used AS players_special_used, players.special_data AS players_special_data, players.revealed_cards AS players_revealed_cards, players.threat_card AS players_threat_card, players.votes_received AS players_votes_received, players.has_voted AS players_has_voted, players.voted_for AS players_voted_for, players.joined_at AS players_joined_at 
-app-1  | FROM players 
-app-1  | WHERE players.game_id = ?]
-app-1  | [parameters: (1,)]
-app-1  | (Background on this error at: https://sqlalche.me/e/20/e3q8)
-app-1  | INFO:     172.21.0.1:50614 - "GET /static/favicon.svg HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:50622 - "GET / HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:50626 - "GET /static/js/landing.js HTTP/1.1" 304 Not Modified
+app-1  | INFO:     172.21.0.1:47736 - "GET /api/games/9AMUMQ HTTP/1.1" 404 Not Found
+app-1  | INFO:     172.21.0.1:47748 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47764 - "GET / HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47774 - "GET /game/9AMUMQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47790 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47788 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47804 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: BSiaMSJp0P...
+app-1  | INFO:     172.21.0.1:47814 - "GET /api/games/9AMUMQ HTTP/1.1" 404 Not Found
+app-1  | INFO:     172.21.0.1:47824 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47830 - "GET / HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47838 - "GET /game/9AMUMQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47848 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47850 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47858 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: ZE5qyy6YTW...
+app-1  | INFO:     172.21.0.1:47864 - "GET /api/games/9AMUMQ HTTP/1.1" 404 Not Found
+app-1  | INFO:     172.21.0.1:47872 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47882 - "GET / HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 47890) - "WebSocket /ws/H7INXQ" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
 app-1  | INFO:     connection closed
-app-1  | INFO:     172.21.0.1:39532 - "GET /game/H7INXQ HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:39548 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:39550 - "GET /static/css/main.css HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:39558 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:58636 - "POST /api/games/create HTTP/1.1" 201 Created
+app-1  | INFO:     172.21.0.1:58640 - "GET /game/B_4ALW HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:58642 - "GET /static/js/game.js HTTP/1.1" 304 Not Modified
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:58652 - "GET /api/games/B_4ALW HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:58658 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 58674) - "WebSocket /ws/B_4ALW" [accepted]
+app-1  | INFO:     connection open
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
+app-1  | INFO:     172.21.0.1:58678 - "POST /api/games/join HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:58694 - "GET /api/games/B_4ALW HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:58698 - "GET /game/B_4ALW HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:58712 - "GET /static/js/game.js HTTP/1.1" 304 Not Modified
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
+app-1  | INFO:     172.21.0.1:58726 - "GET /api/games/B_4ALW HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:58736 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 58746) - "WebSocket /ws/B_4ALW" [accepted]
+app-1  | INFO:     connection open
+app-1  | DEBUG: Found session_id cookie: ZE5qyy6YTW...
+app-1  | INFO:     172.21.0.1:58754 - "POST /api/games/join HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:58768 - "GET /game/B_4ALW HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
+app-1  | INFO:     172.21.0.1:58770 - "GET /api/games/B_4ALW HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:58786 - "GET /api/games/B_4ALW HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:58794 - "GET /static/js/game.js HTTP/1.1" 304 Not Modified
+app-1  | DEBUG: Found session_id cookie: ZE5qyy6YTW...
+app-1  | INFO:     172.21.0.1:58808 - "GET /api/games/B_4ALW HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:58814 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 58818) - "WebSocket /ws/B_4ALW" [accepted]
+app-1  | INFO:     connection open
+app-1  | INFO:     ('172.21.0.1', 58830) - "WebSocket /ws/H7INXQ" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
 app-1  | INFO:     connection closed
 app-1  | DEBUG: Found session_id cookie: BSiaMSJp0P...
-app-1  | INFO:     172.21.0.1:39562 - "GET /api/games/H7INXQ HTTP/1.1" 500 Internal Server Error
-app-1  | ERROR:    Exception in ASGI application
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlite3.OperationalError: no such column: players.special_data
-app-1  | 
-app-1  | The above exception was the direct cause of the following exception:
-app-1  | 
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
-app-1  |     result = await app(  # type: ignore[func-returns-value]
-app-1  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
-app-1  |     return await self.app(scope, receive, send)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
-app-1  |     await super().__call__(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
-app-1  |     await self.app(scope, receive, _send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 85, in __call__
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
-app-1  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
-app-1  |     await route.handle(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
-app-1  |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
-app-1  |     response = await f(request)
-app-1  |                ^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
-app-1  |     raw_response = await run_endpoint_function(
-app-1  |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
-app-1  |     return await dependant.call(**values)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/app/backend/app/routers/games.py", line 153, in get_game
-app-1  |     players = db.query(Player).filter(Player.game_id == game.id).all()
-app-1  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2673, in all
-app-1  |     return self._iter().all()  # type: ignore
-app-1  |            ^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2827, in _iter
-app-1  |     result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
-app-1  |                                                   ^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2362, in execute
-app-1  |     return self._execute_internal(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2247, in _execute_internal
-app-1  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
-app-1  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
-app-1  |     result = conn.execute(
-app-1  |              ^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
-app-1  |     return meth(
-app-1  |            ^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
-app-1  |     return connection._execute_clauseelement(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
-app-1  |     ret = self._execute_context(
-app-1  |           ^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
-app-1  |     return self._exec_single_context(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
-app-1  |     self._handle_dbapi_exception(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
-app-1  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: players.special_data
-app-1  | [SQL: SELECT players.id AS players_id, players.game_id AS players_game_id, players.session_id AS players_session_id, players.name AS players_name, players.status AS players_status, players.is_host AS players_is_host, players.profession AS players_profession, players.biology AS players_biology, players.health AS players_health, players.hobby AS players_hobby, players.baggage AS players_baggage, players.fact AS players_fact, players.special_condition AS players_special_condition, players.special_used AS players_special_used, players.special_data AS players_special_data, players.revealed_cards AS players_revealed_cards, players.threat_card AS players_threat_card, players.votes_received AS players_votes_received, players.has_voted AS players_has_voted, players.voted_for AS players_voted_for, players.joined_at AS players_joined_at 
-app-1  | FROM players 
-app-1  | WHERE players.game_id = ?]
-app-1  | [parameters: (1,)]
-app-1  | (Background on this error at: https://sqlalche.me/e/20/e3q8)
-app-1  | INFO:     172.21.0.1:39576 - "GET /static/favicon.svg HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:39586 - "GET /game/H7INXQ HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:39602 - "GET / HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:39612 - "GET /static/js/landing.js HTTP/1.1" 304 Not Modified
-app-1  | INFO:     172.21.0.1:39626 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:39622 - "GET /static/css/main.css HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:39640 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:35884 - "POST /api/games/join HTTP/1.1" 200 OK
 app-1  | DEBUG: Found session_id cookie: ZE5qyy6YTW...
-app-1  | INFO:     172.21.0.1:39648 - "GET /api/games/H7INXQ HTTP/1.1" 500 Internal Server Error
-app-1  | ERROR:    Exception in ASGI application
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlite3.OperationalError: no such column: players.special_data
-app-1  | 
-app-1  | The above exception was the direct cause of the following exception:
-app-1  | 
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
-app-1  |     result = await app(  # type: ignore[func-returns-value]
-app-1  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
-app-1  |     return await self.app(scope, receive, send)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
-app-1  |     await super().__call__(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
-app-1  |     await self.app(scope, receive, _send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 85, in __call__
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
-app-1  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
-app-1  |     await route.handle(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
-app-1  |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
-app-1  |     response = await f(request)
-app-1  |                ^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
-app-1  |     raw_response = await run_endpoint_function(
-app-1  |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
-app-1  |     return await dependant.call(**values)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/app/backend/app/routers/games.py", line 153, in get_game
-app-1  |     players = db.query(Player).filter(Player.game_id == game.id).all()
-app-1  |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2673, in all
-app-1  |     return self._iter().all()  # type: ignore
-app-1  |            ^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2827, in _iter
-app-1  |     result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
-app-1  |                                                   ^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2362, in execute
-app-1  |     return self._execute_internal(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2247, in _execute_internal
-app-1  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
-app-1  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
-app-1  |     result = conn.execute(
-app-1  |              ^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
-app-1  |     return meth(
-app-1  |            ^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
-app-1  |     return connection._execute_clauseelement(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
-app-1  |     ret = self._execute_context(
-app-1  |           ^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
-app-1  |     return self._exec_single_context(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
-app-1  |     self._handle_dbapi_exception(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
-app-1  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: players.special_data
-app-1  | [SQL: SELECT players.id AS players_id, players.game_id AS players_game_id, players.session_id AS players_session_id, players.name AS players_name, players.status AS players_status, players.is_host AS players_is_host, players.profession AS players_profession, players.biology AS players_biology, players.health AS players_health, players.hobby AS players_hobby, players.baggage AS players_baggage, players.fact AS players_fact, players.special_condition AS players_special_condition, players.special_used AS players_special_used, players.special_data AS players_special_data, players.revealed_cards AS players_revealed_cards, players.threat_card AS players_threat_card, players.votes_received AS players_votes_received, players.has_voted AS players_has_voted, players.voted_for AS players_voted_for, players.joined_at AS players_joined_at 
-app-1  | FROM players 
-app-1  | WHERE players.game_id = ?]
-app-1  | [parameters: (1,)]
-app-1  | (Background on this error at: https://sqlalche.me/e/20/e3q8)
-app-1  | INFO:     172.21.0.1:39658 - "GET /static/favicon.svg HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:39660 - "GET / HTTP/1.1" 200 OK
-app-1  | INFO:     172.21.0.1:39668 - "GET /static/js/landing.js HTTP/1.1" 304 Not Modified
+app-1  | INFO:     172.21.0.1:35898 - "GET /api/games/B_4ALW HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:35904 - "GET /game/B_4ALW HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
 app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
-app-1  | INFO:     172.21.0.1:39142 - "POST /api/games/create HTTP/1.1" 500 Internal Server Error
-app-1  | ERROR:    Exception in ASGI application
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlite3.OperationalError: no such column: players.special_data
-app-1  | 
-app-1  | The above exception was the direct cause of the following exception:
-app-1  | 
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
-app-1  |     result = await app(  # type: ignore[func-returns-value]
-app-1  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
-app-1  |     return await self.app(scope, receive, send)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
-app-1  |     await super().__call__(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
-app-1  |     await self.app(scope, receive, _send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 93, in __call__
-app-1  |     await self.simple_response(scope, receive, send, request_headers=headers)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 144, in simple_response
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
-app-1  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
-app-1  |     await route.handle(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
-app-1  |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
-app-1  |     response = await f(request)
-app-1  |                ^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
-app-1  |     raw_response = await run_endpoint_function(
-app-1  |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
-app-1  |     return await dependant.call(**values)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/app/backend/app/routers/games.py", line 46, in create_game
-app-1  |     game, player = GameService.create_game(
-app-1  |                    ^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/app/backend/app/services/game_service.py", line 38, in create_game
-app-1  |     db.query(Player).filter(Player.session_id == session_id).first()
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2728, in first
-app-1  |     return self.limit(1)._iter().first()  # type: ignore
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2827, in _iter
-app-1  |     result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
-app-1  |                                                   ^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2362, in execute
-app-1  |     return self._execute_internal(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2247, in _execute_internal
-app-1  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
-app-1  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
-app-1  |     result = conn.execute(
-app-1  |              ^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
-app-1  |     return meth(
-app-1  |            ^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
-app-1  |     return connection._execute_clauseelement(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
-app-1  |     ret = self._execute_context(
-app-1  |           ^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
-app-1  |     return self._exec_single_context(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
-app-1  |     self._handle_dbapi_exception(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
-app-1  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: players.special_data
-app-1  | [SQL: SELECT players.id AS players_id, players.game_id AS players_game_id, players.session_id AS players_session_id, players.name AS players_name, players.status AS players_status, players.is_host AS players_is_host, players.profession AS players_profession, players.biology AS players_biology, players.health AS players_health, players.hobby AS players_hobby, players.baggage AS players_baggage, players.fact AS players_fact, players.special_condition AS players_special_condition, players.special_used AS players_special_used, players.special_data AS players_special_data, players.revealed_cards AS players_revealed_cards, players.threat_card AS players_threat_card, players.votes_received AS players_votes_received, players.has_voted AS players_has_voted, players.voted_for AS players_voted_for, players.joined_at AS players_joined_at 
-app-1  | FROM players 
-app-1  | WHERE players.session_id = ?
-app-1  |  LIMIT ? OFFSET ?]
-app-1  | [parameters: ('7QoodPvtcIohQOF_10sf8ynKfA8Kf4_DzhjZIYqHIJw', 1, 0)]
-app-1  | (Background on this error at: https://sqlalche.me/e/20/e3q8)
+app-1  | INFO:     172.21.0.1:35912 - "GET /api/games/B_4ALW HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:35924 - "GET /api/games/B_4ALW HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:35938 - "GET /static/js/game.js HTTP/1.1" 304 Not Modified
+app-1  | DEBUG: Found session_id cookie: BSiaMSJp0P...
+app-1  | INFO:     172.21.0.1:35946 - "GET /api/games/B_4ALW HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:35962 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 35970) - "WebSocket /ws/B_4ALW" [accepted]
+app-1  | INFO:     connection open
 app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
-app-1  | INFO:     172.21.0.1:39144 - "POST /api/games/create HTTP/1.1" 500 Internal Server Error
-app-1  | ERROR:    Exception in ASGI application
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlite3.OperationalError: no such column: players.special_data
-app-1  | 
-app-1  | The above exception was the direct cause of the following exception:
-app-1  | 
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
-app-1  |     result = await app(  # type: ignore[func-returns-value]
-app-1  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
-app-1  |     return await self.app(scope, receive, send)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
-app-1  |     await super().__call__(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
-app-1  |     await self.app(scope, receive, _send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 93, in __call__
-app-1  |     await self.simple_response(scope, receive, send, request_headers=headers)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 144, in simple_response
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
-app-1  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
-app-1  |     await route.handle(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
-app-1  |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
-app-1  |     response = await f(request)
-app-1  |                ^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
-app-1  |     raw_response = await run_endpoint_function(
-app-1  |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
-app-1  |     return await dependant.call(**values)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/app/backend/app/routers/games.py", line 46, in create_game
-app-1  |     game, player = GameService.create_game(
-app-1  |                    ^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/app/backend/app/services/game_service.py", line 38, in create_game
-app-1  |     db.query(Player).filter(Player.session_id == session_id).first()
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2728, in first
-app-1  |     return self.limit(1)._iter().first()  # type: ignore
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2827, in _iter
-app-1  |     result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
-app-1  |                                                   ^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2362, in execute
-app-1  |     return self._execute_internal(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2247, in _execute_internal
-app-1  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
-app-1  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
-app-1  |     result = conn.execute(
-app-1  |              ^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
-app-1  |     return meth(
-app-1  |            ^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
-app-1  |     return connection._execute_clauseelement(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
-app-1  |     ret = self._execute_context(
-app-1  |           ^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
-app-1  |     return self._exec_single_context(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
-app-1  |     self._handle_dbapi_exception(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
-app-1  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: players.special_data
-app-1  | [SQL: SELECT players.id AS players_id, players.game_id AS players_game_id, players.session_id AS players_session_id, players.name AS players_name, players.status AS players_status, players.is_host AS players_is_host, players.profession AS players_profession, players.biology AS players_biology, players.health AS players_health, players.hobby AS players_hobby, players.baggage AS players_baggage, players.fact AS players_fact, players.special_condition AS players_special_condition, players.special_used AS players_special_used, players.special_data AS players_special_data, players.revealed_cards AS players_revealed_cards, players.threat_card AS players_threat_card, players.votes_received AS players_votes_received, players.has_voted AS players_has_voted, players.voted_for AS players_voted_for, players.joined_at AS players_joined_at 
-app-1  | FROM players 
-app-1  | WHERE players.session_id = ?
-app-1  |  LIMIT ? OFFSET ?]
-app-1  | [parameters: ('7QoodPvtcIohQOF_10sf8ynKfA8Kf4_DzhjZIYqHIJw', 1, 0)]
-app-1  | (Background on this error at: https://sqlalche.me/e/20/e3q8)
+app-1  | DEBUG: start_game game_id=1 session_id=7QoodPvtcIohQOF_10sf8ynKfA8Kf4_DzhjZIYqHIJw
+app-1  | DEBUG: host_id=1 host_session_id=7QoodPvtcIohQOF_10sf8ynKfA8Kf4_DzhjZIYqHIJw
+app-1  | DEBUG: Game started - phase=bunker_reveal, phase_end_time=2025-12-02 15:07:46.815676
+app-1  | DEBUG: Broadcasting phase_change to game 1: phase=bunker_reveal, phase_end_time=2025-12-02T15:07:46.815676
+app-1  | INFO:     172.21.0.1:35972 - "POST /api/games/1/start HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: ZE5qyy6YTW...
+app-1  | DEBUG: Found session_id cookie: BSiaMSJp0P...
 app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
-app-1  | INFO:     172.21.0.1:39154 - "POST /api/games/create HTTP/1.1" 500 Internal Server Error
-app-1  | ERROR:    Exception in ASGI application
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlite3.OperationalError: no such column: players.special_data
-app-1  | 
-app-1  | The above exception was the direct cause of the following exception:
-app-1  | 
-app-1  | Traceback (most recent call last):
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
-app-1  |     result = await app(  # type: ignore[func-returns-value]
-app-1  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
-app-1  |     return await self.app(scope, receive, send)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
-app-1  |     await super().__call__(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
-app-1  |     await self.app(scope, receive, _send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 93, in __call__
-app-1  |     await self.simple_response(scope, receive, send, request_headers=headers)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/cors.py", line 144, in simple_response
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
-app-1  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
-app-1  |     await self.middleware_stack(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
-app-1  |     await route.handle(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
-app-1  |     await self.app(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
-app-1  |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
-app-1  |     raise exc
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
-app-1  |     await app(scope, receive, sender)
-app-1  |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
-app-1  |     response = await f(request)
-app-1  |                ^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
-app-1  |     raw_response = await run_endpoint_function(
-app-1  |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
-app-1  |     return await dependant.call(**values)
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/app/backend/app/routers/games.py", line 46, in create_game
-app-1  |     game, player = GameService.create_game(
-app-1  |                    ^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/app/backend/app/services/game_service.py", line 38, in create_game
-app-1  |     db.query(Player).filter(Player.session_id == session_id).first()
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2728, in first
-app-1  |     return self.limit(1)._iter().first()  # type: ignore
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2827, in _iter
-app-1  |     result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
-app-1  |                                                   ^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2362, in execute
-app-1  |     return self._execute_internal(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2247, in _execute_internal
-app-1  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
-app-1  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
-app-1  |     result = conn.execute(
-app-1  |              ^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
-app-1  |     return meth(
-app-1  |            ^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
-app-1  |     return connection._execute_clauseelement(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
-app-1  |     ret = self._execute_context(
-app-1  |           ^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
-app-1  |     return self._exec_single_context(
-app-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
-app-1  |     self._handle_dbapi_exception(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
-app-1  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-app-1  |     self.dialect.do_execute(
-app-1  |   File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-app-1  |     cursor.execute(statement, parameters)
-app-1  | sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: players.special_data
-app-1  | [SQL: SELECT players.id AS players_id, players.game_id AS players_game_id, players.session_id AS players_session_id, players.name AS players_name, players.status AS players_status, players.is_host AS players_is_host, players.profession AS players_profession, players.biology AS players_biology, players.health AS players_health, players.hobby AS players_hobby, players.baggage AS players_baggage, players.fact AS players_fact, players.special_condition AS players_special_condition, players.special_used AS players_special_used, players.special_data AS players_special_data, players.revealed_cards AS players_revealed_cards, players.threat_card AS players_threat_card, players.votes_received AS players_votes_received, players.has_voted AS players_has_voted, players.voted_for AS players_voted_for, players.joined_at AS players_joined_at 
-app-1  | FROM players 
-app-1  | WHERE players.session_id = ?
-app-1  |  LIMIT ? OFFSET ?]
-app-1  | [parameters: ('7QoodPvtcIohQOF_10sf8ynKfA8Kf4_DzhjZIYqHIJw', 1, 0)]
-app-1  | (Background on this error at: https://sqlalche.me/e/20/e3q8)
+app-1  | INFO:     172.21.0.1:35978 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:35988 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:35992 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
+app-1  | INFO:     172.21.0.1:36002 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:36010 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:36018 - "GET /api/games/B_4ALW HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 37366) - "WebSocket /ws/H7INXQ" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 60442) - "WebSocket /ws/H7INXQ" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 39340) - "WebSocket /ws/H7INXQ" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 40384) - "WebSocket /ws/H7INXQ" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 60366) - "WebSocket /ws/H7INXQ" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 40394) - "WebSocket /ws/H7INXQ" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
