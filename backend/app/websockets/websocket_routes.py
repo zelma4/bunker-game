@@ -65,6 +65,7 @@ async def websocket_endpoint(
                             "is_host": p.is_host,
                             "votes_received": p.votes_received,
                             "has_voted": p.has_voted,
+                            "revealed_cards": p.revealed_cards if p.revealed_cards else [],
                         }
                         for p in players
                     ],

@@ -29,27 +29,27 @@
 <body class="bg-bunker-dark text-gray-100 font-inter overflow-hidden">
     <div class="h-screen flex flex-col" x-data="gamePage('{{ game_code }}')">
         <!-- Mobile Sidebar Overlay -->
-        <div class="sidebar-overlay" 
-             :class="{ 'active': leftSidebarOpen || rightSidebarOpen }"
-             @click="leftSidebarOpen = false; rightSidebarOpen = false"></div>
-        
+        <div class="sidebar-overlay" :class="{ 'active': leftSidebarOpen || rightSidebarOpen }"
+            @click="leftSidebarOpen = false; rightSidebarOpen = false"></div>
+
         <!-- Mobile Menu Buttons -->
-        <button class="mobile-menu-btn mobile-menu-btn-left md:hidden" 
-                @click="leftSidebarOpen = !leftSidebarOpen"
-                aria-label="Toggle my cards">
+        <button class="mobile-menu-btn mobile-menu-btn-left md:hidden" @click="leftSidebarOpen = !leftSidebarOpen"
+            aria-label="Toggle my cards">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                </path>
             </svg>
         </button>
-        
-        <button class="mobile-menu-btn mobile-menu-btn-right md:hidden" 
-                @click="rightSidebarOpen = !rightSidebarOpen"
-                aria-label="Toggle chat">
+
+        <button class="mobile-menu-btn mobile-menu-btn-right md:hidden" @click="rightSidebarOpen = !rightSidebarOpen"
+            aria-label="Toggle chat">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                </path>
             </svg>
         </button>
-        
+
         <!-- Header -->
         <header class="bg-bunker-darker border-b border-red-900/30 px-4 py-3">
             <div class="flex justify-between items-center">
@@ -88,12 +88,12 @@
 
                     <!-- Host Skip Button -->
                     <div x-show="isHost && game.phase !== 'lobby' && timeRemaining > 0">
-                        <button @click="skipPhase" 
-                                :disabled="isAdvancing"
-                                class="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-lg transition-all duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                                title="Пропустити фазу">
+                        <button @click="skipPhase" :disabled="isAdvancing"
+                            class="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-lg transition-all duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                            title="Пропустити фазу">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
                             </svg>
                             <span class="hidden sm:inline">SKIP</span>
                         </button>
@@ -106,7 +106,9 @@
                         </div>
                     </div>
 
-                    <div x-show="game.phase === 'lobby' && isHost" class="ml-2">
+                    <div x-show="game.phase === 'lobby' && isHost"
+                        x-effect="console.log('[UI] Start button visibility:', game.phase === 'lobby' && isHost, 'phase:', game.phase, 'isHost:', isHost, 'playerCount:', playerCount)"
+                        class="ml-2">
                         <button @click="startGame" :disabled="playerCount < 4" class="btn-primary text-sm py-2 px-4">
                             Почати Гру
                         </button>
@@ -126,14 +128,14 @@
         <div class="flex-1 flex overflow-hidden">
             <!-- Left Sidebar - My Cards -->
             <aside class="w-72 bg-bunker-darker border-r border-red-900/30 overflow-y-auto"
-                   :class="{ 'open': leftSidebarOpen }">
+                :class="{ 'open': leftSidebarOpen }">
                 <div class="p-4">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-lg font-orbitron font-bold">Мої Картки</h2>
-                        <button class="md:hidden text-gray-400 hover:text-white" 
-                                @click="leftSidebarOpen = false">
+                        <button class="md:hidden text-gray-400 hover:text-white" @click="leftSidebarOpen = false">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
                         </button>
                     </div>
@@ -146,7 +148,8 @@
                             <div class="simple-card-header">
                                 <span>🎭</span>
                                 <span>Професія</span>
-                                <span x-show="isCardRevealed('profession')" class="ml-auto text-green-400">✓ Відкрито</span>
+                                <span x-show="isCardRevealed('profession')" class="ml-auto text-green-400">✓
+                                    Відкрито</span>
                             </div>
                             <div class="simple-card-content" x-text="myCharacter.profession || 'Завантаження...'"></div>
                             <button x-show="canRevealCard('profession')" @click="revealCard('profession')"
@@ -159,7 +162,8 @@
                             <div class="simple-card-header">
                                 <span>🧬</span>
                                 <span>Біологія</span>
-                                <span x-show="isCardRevealed('biology')" class="ml-auto text-green-400">✓ Відкрито</span>
+                                <span x-show="isCardRevealed('biology')" class="ml-auto text-green-400">✓
+                                    Відкрито</span>
                             </div>
                             <div class="simple-card-content" x-text="myCharacter.biology || 'Завантаження...'"></div>
                             <button x-show="canRevealCard('biology')" @click="revealCard('biology')"
@@ -198,7 +202,8 @@
                             <div class="simple-card-header">
                                 <span>🎒</span>
                                 <span>Багаж</span>
-                                <span x-show="isCardRevealed('baggage')" class="ml-auto text-green-400">✓ Відкрито</span>
+                                <span x-show="isCardRevealed('baggage')" class="ml-auto text-green-400">✓
+                                    Відкрито</span>
                             </div>
                             <div class="simple-card-content" x-text="myCharacter.baggage || 'Завантаження...'"></div>
                             <button x-show="canRevealCard('baggage')" @click="revealCard('baggage')"
@@ -433,13 +438,13 @@
 
             <!-- Right Sidebar - Chat -->
             <aside class="w-80 bg-bunker-darker border-l border-red-900/30 flex flex-col"
-                   :class="{ 'open': rightSidebarOpen }">
+                :class="{ 'open': rightSidebarOpen }">
                 <div class="p-4 border-b border-red-900/30 flex items-center justify-between">
                     <h2 class="text-lg font-orbitron font-bold">Чат</h2>
-                    <button class="md:hidden text-gray-400 hover:text-white" 
-                            @click="rightSidebarOpen = false">
+                    <button class="md:hidden text-gray-400 hover:text-white" @click="rightSidebarOpen = false">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>

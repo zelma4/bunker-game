@@ -3,6 +3,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from typing import List
+from datetime import datetime, timedelta
 import secrets
 
 from ..database import get_db
@@ -130,6 +131,10 @@ async def join_game(
         revealed_bunker_cards=game.revealed_bunker_cards,
     )
 
+    # Broadcast player joined via WebSocket
+    from ..websockets.connection_manager import manager
+    await manager.send_player_joined(game.id, player.name)
+
     return response_data
 
 
@@ -151,9 +156,10 @@ async def get_game(game_code: str, request: Request, db: Session = Depends(get_d
         p_resp = PlayerResponse.model_validate(p)
         is_me = p.session_id == session_id
         p_resp.is_me = is_me
-
-        # Ensure revealed_cards is a list
-        revealed = p.revealed_cards if p.revealed_cards else []
+        
+        # Always ensure revealed_cards is a list (not None)
+        p_resp.revealed_cards = p.revealed_cards if p.revealed_cards else []
+        revealed = p_resp.revealed_cards
 
         if not is_me and p.status == PlayerStatus.PLAYING:
             # Hide unrevealed cards
@@ -293,9 +299,23 @@ async def vote(
     return {"message": "Vote registered"}
 
 
+# Rate limiting for phase advancement
+_last_phase_advance = {}  # game_id -> datetime
+
 @router.post("/{game_id}/advance-phase")
 async def advance_phase(game_id: int, db: Session = Depends(get_db)):
     """Advance to next game phase (called by timer or host)"""
+    global _last_phase_advance
+    
+    # Rate limiting: prevent calling within 1 second of last call
+    now = datetime.utcnow()
+    last_call = _last_phase_advance.get(game_id)
+    if last_call and (now - last_call).total_seconds() < 1:
+        print(f"DEBUG: Ignoring duplicate advance_phase call for game {game_id}")
+        return {"message": "Rate limited", "phase": "unchanged"}
+    
+    _last_phase_advance[game_id] = now
+    
     new_phase = GameService.advance_phase(db, game_id)
 
     if not new_phase:

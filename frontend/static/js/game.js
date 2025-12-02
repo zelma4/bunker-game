@@ -28,6 +28,8 @@ function gamePage(gameCode) {
         },
         chatMessage: '',
         ws: null,
+        wsConnecting: false,
+        wsReconnectAttempts: 0,
         timeRemaining: 0,
         timerInterval: null,
         leftSidebarOpen: false,
@@ -39,6 +41,13 @@ function gamePage(gameCode) {
             await this.loadMessages();
             this.connectWebSocket();
             this.startTimer();
+
+            // Cleanup on page unload
+            window.addEventListener('beforeunload', () => {
+                if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+                    this.ws.close();
+                }
+            });
         },
 
         async loadGameData() {
@@ -98,13 +107,31 @@ function gamePage(gameCode) {
         },
 
         connectWebSocket() {
+            // Prevent duplicate connections
+            if (this.wsConnecting) {
+                console.log('[WS] Already connecting, skipping...');
+                return;
+            }
+
+            // Close existing connection if any
+            if (this.ws && this.ws.readyState !== WebSocket.CLOSED) {
+                console.log('[WS] Closing existing connection');
+                this.ws.close();
+                this.ws = null;
+            }
+
+            this.wsConnecting = true;
             const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
             const wsUrl = `${protocol}//${window.location.host}/ws/${this.gameCode}`;
 
+            console.log('[WS] Connecting to:', wsUrl);
             this.ws = new WebSocket(wsUrl);
 
             this.ws.onopen = () => {
                 console.log('[WS] WebSocket connected');
+                this.wsConnecting = false;
+                this.wsReconnectAttempts = 0;
+
                 // Request fresh game state when reconnecting
                 if (this.ws.readyState === WebSocket.OPEN) {
                     this.ws.send(JSON.stringify({ type: 'request_update' }));
@@ -118,16 +145,23 @@ function gamePage(gameCode) {
 
             this.ws.onerror = (error) => {
                 console.error('[WS] WebSocket error:', error);
+                this.wsConnecting = false;
             };
 
             this.ws.onclose = () => {
-                console.log('[WS] WebSocket disconnected - reconnecting in 3s...');
-                // Reconnect after 3 seconds
+                console.log('[WS] WebSocket disconnected');
+                this.wsConnecting = false;
+
+                // Exponential backoff for reconnection
+                this.wsReconnectAttempts++;
+                const delay = Math.min(1000 * Math.pow(2, this.wsReconnectAttempts), 10000);
+
+                console.log(`[WS] Reconnecting in ${delay}ms... (attempt ${this.wsReconnectAttempts})`);
                 setTimeout(() => {
                     if (!this.ws || this.ws.readyState === WebSocket.CLOSED) {
                         this.connectWebSocket();
                     }
-                }, 3000);
+                }, delay);
             };
         },
 
@@ -142,8 +176,14 @@ function gamePage(gameCode) {
                     this.handleChatMessage(data.data);
                     break;
                 case 'player_joined':
-                    console.log('[WS] Player joined');
-                    this.loadGameData();
+                    console.log('[WS] Player joined:', data.data?.player_name);
+                    // Force reload game data to update player count
+                    this.loadGameData().then(() => {
+                        // Force Alpine reactivity
+                        this.$nextTick(() => {
+                            console.log('[WS] Player list updated, count:', this.playerCount);
+                        });
+                    });
                     break;
                 case 'player_left':
                     console.log('[WS] Player left');
@@ -154,12 +194,12 @@ function gamePage(gameCode) {
                     this.game.phase = data.data.phase;
                     this.game.phase_end_time = data.data.phase_end_time;
                     this.startTimer(); // Restart timer with new phase_end_time
-                    
+
                     // Reload character data if game started
                     if (this.game.phase !== 'lobby') {
                         this.loadMyCharacter();
                     }
-                    
+
                     // Force Alpine.js to update by using $nextTick
                     this.$nextTick(() => {
                         console.log('[WS] UI updated after phase change');
@@ -190,7 +230,7 @@ function gamePage(gameCode) {
                 this.players = data.players;
                 this.myPlayer = this.players.find(p => p.is_me) || null;
             }
-            
+
             // Restart timer when game updates
             this.startTimer();
         },
@@ -223,11 +263,11 @@ function gamePage(gameCode) {
                 if (!player.revealed_cards) player.revealed_cards = [];
                 if (!player.revealed_cards.includes(data.card_type)) {
                     player.revealed_cards.push(data.card_type);
-                    
+
                     // Update card value
                     if (data.card_value) {
                         player[data.card_type] = data.card_value;
-                        
+
                         // If this is my player, update myPlayer and myCharacter
                         if (player.is_me) {
                             this.myPlayer = player;
@@ -263,7 +303,7 @@ function gamePage(gameCode) {
                     player.has_voted = data[playerId].has_voted;
                 }
             });
-            
+
             // Force Alpine.js reactivity
             this.$nextTick(() => {
                 console.log('[WS] Votes updated in UI');
@@ -439,11 +479,11 @@ function gamePage(gameCode) {
                 const response = await fetch(`/api/games/${gameId}/advance-phase`, {
                     method: 'POST'
                 });
-                
+
                 if (!response.ok) {
                     throw new Error('Failed to advance phase');
                 }
-                
+
                 // Phase will update via WebSocket
                 console.log('Phase advanced successfully');
             } catch (err) {
@@ -527,7 +567,8 @@ function gamePage(gameCode) {
         },
 
         get playerCount() {
-            return this.players.length;
+            // Force Alpine reactivity
+            return Array.isArray(this.players) ? this.players.length : 0;
         },
 
         get isHost() {
