@@ -1,0 +1,658 @@
+docker compose logs
+app-1  | INFO:     Started server process [1]
+app-1  | INFO:     Waiting for application startup.
+app-1  | INFO:     Application startup complete.
+app-1  | INFO:     Uvicorn running on http://0.0.0.0:8765 (Press CTRL+C to quit)
+app-1  | INFO:     ('172.21.0.1', 35906) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 35914) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     ('172.21.0.1', 35924) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 35632) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     ('172.21.0.1', 35642) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     ('172.21.0.1', 35652) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     ('172.21.0.1', 35668) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     connection closed
+app-1  | INFO:     connection closed
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 35672) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 35676) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     ('172.21.0.1', 35680) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 35696) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 35706) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 35718) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 35722) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 44808) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     ('172.21.0.1', 44812) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 44820) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 44830) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 44838) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 44848) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 44864) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 44874) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 45252) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     ('172.21.0.1', 45268) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 45276) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 45288) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     ('172.21.0.1', 45294) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 45300) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 45304) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 45312) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     172.21.0.1:45326 - "GET / HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 45328) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 45332) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 45340) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 59440) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     ('172.21.0.1', 59454) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 59466) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     ('172.21.0.1', 59474) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 59490) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 59492) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 59502) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 59504) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54800) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54806) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54820) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54832) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54846) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54854) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     ('172.21.0.1', 54856) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54864) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54866) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54876) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54890) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54660) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54674) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54684) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54690) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54706) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54714) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54730) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 54734) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52116) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52130) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52144) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52158) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52174) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52180) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52188) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52204) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52210) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52226) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52236) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 56094) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 56098) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 56108) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 56118) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 56132) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 56142) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 56158) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 56162) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 37784) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 37794) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 37802) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 37810) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 37812) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 37818) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 37820) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 37834) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 37836) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 37838) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 37842) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 47094) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 47108) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 47110) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 47116) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 47124) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 47136) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 47144) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 47152) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 38926) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 38936) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 38940) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 38944) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 38956) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 38968) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 38982) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 38998) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 39722) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 39728) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 39736) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 39748) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 39750) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52194) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52202) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52214) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52218) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52230) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 52232) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 53252) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 53268) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 53270) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 53278) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 53282) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 53298) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 39474) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 39480) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 39490) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     172.21.0.1:39502 - "GET /game/CG0LUG HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39516 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39532 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39536 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:39550 - "GET /api/games/CG0LUG HTTP/1.1" 404 Not Found
+app-1  | INFO:     172.21.0.1:39566 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 39570) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     172.21.0.1:39580 - "GET / HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39584 - "GET /static/js/landing.js HTTP/1.1" 304 Not Modified
+app-1  | INFO:     ('172.21.0.1', 39598) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     172.21.0.1:39610 - "GET /game/CG0LUG HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39614 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39618 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39622 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
+app-1  | INFO:     172.21.0.1:39628 - "GET /api/games/CG0LUG HTTP/1.1" 404 Not Found
+app-1  | INFO:     172.21.0.1:39634 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39638 - "GET / HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39646 - "GET /static/js/landing.js HTTP/1.1" 304 Not Modified
+app-1  | INFO:     172.21.0.1:39658 - "GET /game/CG0LUG HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39668 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39672 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39684 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: BSiaMSJp0P...
+app-1  | INFO:     172.21.0.1:39686 - "GET /api/games/CG0LUG HTTP/1.1" 404 Not Found
+app-1  | INFO:     172.21.0.1:39696 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39706 - "GET / HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39714 - "GET /static/js/landing.js HTTP/1.1" 304 Not Modified
+app-1  | INFO:     172.21.0.1:39724 - "GET /game/CG0LUG HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39736 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39744 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39754 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: ZE5qyy6YTW...
+app-1  | INFO:     172.21.0.1:39756 - "GET /api/games/CG0LUG HTTP/1.1" 404 Not Found
+app-1  | INFO:     172.21.0.1:39764 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39768 - "GET / HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:39784 - "GET /static/js/landing.js HTTP/1.1" 304 Not Modified
+app-1  | INFO:     ('172.21.0.1', 46988) - "WebSocket /ws/CG0LUG" 403
+app-1  | INFO:     connection rejected (403 Forbidden)
+app-1  | INFO:     connection closed
+app-1  | INFO:     172.21.0.1:46998 - "GET /game/CG0LUG HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47006 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47008 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47018 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:47020 - "GET /api/games/CG0LUG HTTP/1.1" 404 Not Found
+app-1  | INFO:     172.21.0.1:47024 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47032 - "GET / HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47038 - "GET /static/js/landing.js HTTP/1.1" 304 Not Modified
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:33098 - "POST /api/games/create HTTP/1.1" 201 Created
+app-1  | INFO:     172.21.0.1:33100 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:33112 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:33120 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 33126) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:33132 - "POST /api/games/join HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:33138 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:33142 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:33144 - "GET /static/js/game.js HTTP/1.1" 304 Not Modified
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:33146 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:33156 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 33170) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
+app-1  | INFO:     172.21.0.1:45228 - "POST /api/games/join HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:45240 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:45232 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:45238 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:45246 - "GET /static/js/game.js HTTP/1.1" 304 Not Modified
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
+app-1  | INFO:     172.21.0.1:45256 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:45272 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: BSiaMSJp0P...
+app-1  | INFO:     172.21.0.1:45278 - "POST /api/games/join HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:45286 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:45290 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:45298 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:45312 - "GET /static/js/game.js HTTP/1.1" 304 Not Modified
+app-1  | DEBUG: Found session_id cookie: BSiaMSJp0P...
+app-1  | INFO:     172.21.0.1:45324 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:45338 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 45348) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | DEBUG: Found session_id cookie: ZE5qyy6YTW...
+app-1  | INFO:     172.21.0.1:45360 - "POST /api/games/join HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
+app-1  | INFO:     172.21.0.1:45374 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:45398 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:45384 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:45388 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:45400 - "GET /static/js/game.js HTTP/1.1" 304 Not Modified
+app-1  | DEBUG: Found session_id cookie: ZE5qyy6YTW...
+app-1  | INFO:     172.21.0.1:45406 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:45418 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 45434) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | INFO:     ('172.21.0.1', 45436) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | DEBUG: start_game game_id=1 session_id=7T4NAi3_X1uEy6fYlHlI5Z0YNrMnAxFTIsg8f1ZD93A
+app-1  | DEBUG: host_id=1 host_session_id=7T4NAi3_X1uEy6fYlHlI5Z0YNrMnAxFTIsg8f1ZD93A
+app-1  | DEBUG: Game started - phase=bunker_reveal, phase_end_time=2025-12-02 14:28:00.225256
+app-1  | DEBUG: Broadcasting phase_change to game 1: phase=bunker_reveal, phase_end_time=2025-12-02T14:28:00.225256
+app-1  | INFO:     172.21.0.1:45442 - "POST /api/games/1/start HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: BSiaMSJp0P...
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | DEBUG: Found session_id cookie: ZE5qyy6YTW...
+app-1  | INFO:     172.21.0.1:45450 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:45446 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:45456 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:45458 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
+app-1  | INFO:     172.21.0.1:45462 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:45466 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:45470 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     connection closed
+app-1  | INFO:     172.21.0.1:44944 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:44958 - "GET /static/js/game.js HTTP/1.1" 304 Not Modified
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:44974 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:44988 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:44996 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 45010) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | INFO:     172.21.0.1:52406 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     connection closed
+app-1  | INFO:     172.21.0.1:52418 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:52424 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:52438 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:52444 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:52450 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:52460 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:52464 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 52468) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | INFO:     connection closed
+app-1  | INFO:     172.21.0.1:52470 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:52494 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:52478 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:52476 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:52500 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:52504 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7T4NAi3_X1...
+app-1  | INFO:     172.21.0.1:52510 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:52512 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 52520) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | INFO:     connection closed
+app-1  | INFO:     172.21.0.1:47124 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47138 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47140 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47144 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     connection closed
+app-1  | INFO:     172.21.0.1:47148 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
+app-1  | INFO:     172.21.0.1:47150 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
+app-1  | INFO:     172.21.0.1:47160 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47164 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47180 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47196 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47210 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47222 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     connection closed
+app-1  | INFO:     ('172.21.0.1', 47234) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:47240 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47246 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:47262 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47274 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47284 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47294 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47306 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47318 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     connection closed
+app-1  | DEBUG: Found session_id cookie: BSiaMSJp0P...
+app-1  | INFO:     172.21.0.1:47334 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47336 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 47352) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | DEBUG: Found session_id cookie: BSiaMSJp0P...
+app-1  | INFO:     172.21.0.1:47360 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47374 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47382 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47390 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47394 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:47406 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 44562) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | DEBUG: Found session_id cookie: ZE5qyy6YTW...
+app-1  | INFO:     172.21.0.1:44570 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:44576 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: ZE5qyy6YTW...
+app-1  | INFO:     172.21.0.1:44578 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:44582 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 44594) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | INFO:     connection closed
+app-1  | INFO:     172.21.0.1:51936 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34610 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34616 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34630 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     connection closed
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
+app-1  | INFO:     172.21.0.1:34646 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34650 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: zR-C5ixb6T...
+app-1  | INFO:     172.21.0.1:34652 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34654 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34660 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34676 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34690 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34694 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:34696 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34706 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | INFO:     connection closed
+app-1  | DEBUG: Found session_id cookie: 7QoodPvtcI...
+app-1  | INFO:     172.21.0.1:34716 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 34724) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | INFO:     172.21.0.1:34732 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34746 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34756 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34758 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34764 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 34778) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | INFO:     connection closed
+app-1  | DEBUG: Found session_id cookie: BSiaMSJp0P...
+app-1  | INFO:     172.21.0.1:34784 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34796 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: BSiaMSJp0P...
+app-1  | INFO:     172.21.0.1:34808 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34814 - "GET /game/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34818 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34832 - "GET /static/css/main.css HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34848 - "GET /static/js/card-templates.js HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34856 - "GET /static/js/game.js HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 34870) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open
+app-1  | DEBUG: Found session_id cookie: ZE5qyy6YTW...
+app-1  | INFO:     172.21.0.1:34886 - "GET /api/games/H7INXQ HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34892 - "GET /static/favicon.svg HTTP/1.1" 200 OK
+app-1  | DEBUG: Found session_id cookie: ZE5qyy6YTW...
+app-1  | INFO:     172.21.0.1:34906 - "GET /api/games/1/my-character HTTP/1.1" 200 OK
+app-1  | INFO:     172.21.0.1:34920 - "GET /api/chat/1/messages HTTP/1.1" 200 OK
+app-1  | INFO:     ('172.21.0.1', 34930) - "WebSocket /ws/H7INXQ" [accepted]
+app-1  | INFO:     connection open

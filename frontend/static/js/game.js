@@ -403,6 +403,108 @@ function gamePage(gameCode) {
             }
         },
 
+        async useSpecial() {
+            const gameId = this.game.id;
+            const special = this.myCharacter.special_condition;
+
+            if (!special) {
+                alert('У вас немає особливої умови');
+                return;
+            }
+
+            // Collect parameters based on special type
+            const specialName = special.name;
+            const params = {};
+
+            // Special conditions that need target player
+            const needsTarget = [
+                'Віддай картку здоров\'я', 'Заручник', 'Антидот', 'Диверсант',
+                'Сплячий агент', 'Клон', 'Мутант', 'Берсерк', 'Анархіст'
+            ];
+
+            // Special conditions that need card type
+            const needsCard = ['Шпигун', 'Ілюзіоніст'];
+
+            // Special conditions that need multiple parameters
+            const complex = ['Телепат', 'Психолог', 'Провокатор'];
+
+            try {
+                if (needsTarget.includes(specialName)) {
+                    const targetId = prompt('Введіть ID гравця (дивіться в списку гравців):');
+                    if (!targetId) return;
+                    params.target_player_id = parseInt(targetId);
+                }
+
+                if (specialName === 'Шпигун') {
+                    const targetId = prompt('ID гравця:');
+                    const cardType = prompt('Тип картки (profession/biology/health/hobby/baggage/fact):');
+                    if (!targetId || !cardType) return;
+                    params.target_player_id = parseInt(targetId);
+                    params.card_type = cardType;
+                }
+
+                if (specialName === 'Телепат') {
+                    const targetId = prompt('ID гравця:');
+                    const cardType = prompt('Тип картки:');
+                    const guess = prompt('Ваше припущення (текст):');
+                    if (!targetId || !cardType || !guess) return;
+                    params.target_player_id = parseInt(targetId);
+                    params.card_type = cardType;
+                    params.guess = guess;
+                }
+
+                if (specialName === 'Психолог') {
+                    const sourceId = prompt('ID гравця, чий голос змінити:');
+                    const targetId = prompt('ID нової цілі голосування:');
+                    if (!sourceId || !targetId) return;
+                    params.source_player_id = parseInt(sourceId);
+                    params.target_player_id = parseInt(targetId);
+                }
+
+                if (specialName === 'Провокатор') {
+                    const player1 = prompt('ID першого гравця:');
+                    const player2 = prompt('ID другого гравця:');
+                    if (!player1 || !player2) return;
+                    params.player1_id = parseInt(player1);
+                    params.player2_id = parseInt(player2);
+                }
+
+                if (specialName === 'Ілюзіоніст') {
+                    const cardType = prompt('Яку картку приховати? (profession/biology/health/hobby/baggage/fact):');
+                    if (!cardType) return;
+                    params.card_type = cardType;
+                }
+
+                // Confirm
+                const confirmed = confirm(`Використати Особливу Умову: ${specialName}?`);
+                if (!confirmed) return;
+
+                // Make API call
+                const response = await fetch(`/api/games/${gameId}/use-special`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(params)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(`✅ ${result.message}`);
+
+                    // Refresh data
+                    await this.loadGameData();
+                    await this.loadMyCharacter();
+                } else {
+                    const error = await response.json();
+                    alert(`❌ ${error.detail || 'Помилка використання особливої умови'}`);
+                }
+            } catch (err) {
+                console.error('Use special error:', err);
+                alert('Помилка при використанні особливої умови');
+            }
+        },
+
         async vote(targetPlayerId) {
             const gameId = this.game.id;
 

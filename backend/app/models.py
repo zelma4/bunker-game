@@ -119,6 +119,7 @@ class Player(Base):
     # Особлива умова
     special_condition = Column(JSON, nullable=True)  # {name, description}
     special_used = Column(Boolean, default=False)
+    special_data = Column(JSON, nullable=True)  # Additional data for special effects
 
     # Відкриті картки (для покрокового відкривання)
     revealed_cards = Column(JSON, default=lambda: [])  # ["profession", "health", ...]

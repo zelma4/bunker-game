@@ -133,6 +133,18 @@ class RevealCardRequest(BaseModel):
     )
 
 
+class UseSpecialRequest(BaseModel):
+    """Schema for using special condition"""
+    
+    # Optional parameters depending on special type
+    target_player_id: Optional[int] = None
+    source_player_id: Optional[int] = None
+    player1_id: Optional[int] = None
+    player2_id: Optional[int] = None
+    card_type: Optional[str] = None
+    guess: Optional[str] = None
+
+
 class CharacterTraits(BaseModel):
     """Schema for character traits"""
 

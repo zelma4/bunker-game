@@ -237,8 +237,7 @@
 
                             <!-- Use Special Button -->
                             <div x-show="myCharacter.special_condition && !myPlayer.special_used" class="mt-2">
-                                <button
-                                    @click="if(confirm('Використати Особливу Умову: ' + myCharacter.special_condition?.name + '?')) { alert('Функція використання Особливих Умов буде реалізована у наступній версії') }"
+                                <button @click="useSpecial()"
                                     class="btn-secondary text-xs w-full bg-yellow-600 hover:bg-yellow-700">
                                     ⚡ Використати
                                 </button>

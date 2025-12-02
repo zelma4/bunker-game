@@ -15,6 +15,7 @@ from ..schemas import (
     VoteRequest,
     CharacterTraits,
     RevealCardRequest,
+    UseSpecialRequest,
 )
 from ..models import Game, Player, GamePhase, PlayerStatus
 from ..services import GameService
@@ -448,3 +449,68 @@ async def reveal_card(
     )
 
     return {"message": "Card revealed", "card_type": card_data.card_type}
+
+
+@router.post("/{game_id}/use-special")
+async def use_special_condition(
+    game_id: int,
+    special_data: UseSpecialRequest,
+    request: Request,
+    db: Session = Depends(get_db),
+):
+    """Use player's special condition"""
+    session_id = get_session_id(request)
+
+    # Get player
+    player = (
+        db.query(Player)
+        .filter(Player.game_id == game_id, Player.session_id == session_id)
+        .first()
+    )
+
+    if not player:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Player not found"
+        )
+
+    if not player.special_condition:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="No special condition"
+        )
+
+    if player.special_used:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, 
+            detail="Special condition already used"
+        )
+
+    # Execute special condition
+    from ..services.special_conditions import SpecialConditionHandler
+
+    params = special_data.dict(exclude_unset=True)
+    result = SpecialConditionHandler.execute(db, game_id, player.id, params)
+
+    if not result.get("success"):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=result.get("message", "Failed to use special condition")
+        )
+
+    # Broadcast to other players
+    from ..websockets.connection_manager import manager
+
+    await manager.send_special_card_used(
+        game_id, 
+        player.name, 
+        player.special_condition.get("name")
+    )
+
+    # Refresh player to get updated data
+    db.refresh(player)
+
+    return {
+        "message": result.get("message"),
+        "effect": result.get("effect"),
+        "data": {k: v for k, v in result.items() if k not in ["success", "message", "effect"]}
+    }
+
