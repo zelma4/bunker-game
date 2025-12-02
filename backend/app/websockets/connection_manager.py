@@ -99,6 +99,7 @@ class ConnectionManager:
         self, game_id: int, phase: str, phase_end_time: str = None
     ):
         """Notify about phase change"""
+        print(f"DEBUG: Broadcasting phase_change to game {game_id}: phase={phase}, phase_end_time={phase_end_time}")
         await self.broadcast_to_game(
             game_id,
             {

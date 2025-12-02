@@ -140,8 +140,10 @@ function gamePage(gameCode) {
                     this.loadGameData();
                     break;
                 case 'phase_change':
+                    console.log('[WS] Phase change received:', data.data);
                     this.game.phase = data.data.phase;
                     this.game.phase_end_time = data.data.phase_end_time;
+                    this.startTimer(); // Restart timer with new phase_end_time
                     this.loadGameData();
                     break;
                 case 'bunker_card_revealed':
@@ -160,6 +162,7 @@ function gamePage(gameCode) {
         },
 
         handleGameUpdate(data) {
+            console.log('[WS] Game update received:', { phase: data.phase, phase_end_time: data.phase_end_time });
             this.game.phase = data.phase;
             this.game.current_round = data.current_round;
             this.game.phase_end_time = data.phase_end_time;
@@ -168,6 +171,9 @@ function gamePage(gameCode) {
                 this.players = data.players;
                 this.myPlayer = this.players.find(p => p.is_me) || null;
             }
+            
+            // Restart timer when game updates
+            this.startTimer();
         },
 
         handleChatMessage(data) {
