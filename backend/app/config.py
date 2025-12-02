@@ -29,7 +29,13 @@ class Settings(BaseSettings):
     VOTING_TIME_SECONDS: int = 60
     
     # CORS
-    CORS_ORIGINS: list[str] = ["*"]  # Allow all origins for server deployment
+    CORS_ORIGINS: list[str] = [
+        "*",  # Allow all origins for flexibility
+        "https://bunker.zelma4.me",
+        "http://bunker.zelma4.me",
+        "http://localhost:8765",
+        "http://localhost:8000"
+    ]
     
     # Rate Limiting
     CHAT_RATE_LIMIT: int = 10  # messages per minute
