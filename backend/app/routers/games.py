@@ -309,11 +309,11 @@ async def advance_phase(game_id: int, db: Session = Depends(get_db)):
     """Advance to next game phase (called by timer or host)"""
     global _last_phase_advance
     
-    # Rate limiting: prevent calling within 1 second of last call
+    # Rate limiting: prevent calling within 5 seconds of last call
     now = datetime.utcnow()
     last_call = _last_phase_advance.get(game_id)
-    if last_call and (now - last_call).total_seconds() < 1:
-        print(f"DEBUG: Ignoring duplicate advance_phase call for game {game_id}")
+    if last_call and (now - last_call).total_seconds() < 5:
+        print(f"DEBUG: Ignoring duplicate advance_phase call for game {game_id} (rate limited)")
         return {"message": "Rate limited", "phase": "unchanged"}
     
     _last_phase_advance[game_id] = now
