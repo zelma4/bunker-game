@@ -336,10 +336,13 @@ class GameService:
             # Game over - move to survival check or end
             if game.mode == GameMode.SURVIVAL_STORY:
                 game.phase = GamePhase.SURVIVAL_CHECK
+                duration = get_phase_duration("survival_check")
+                game.phase_end_time = datetime.utcnow() + timedelta(seconds=duration)
                 GameService._assign_threat_cards(db, game.id, players)
             else:
                 game.phase = GamePhase.ENDED
                 game.ended_at = datetime.utcnow()
+                game.phase_end_time = None  # No timer for ended phase
                 for player in players:
                     if player.status == PlayerStatus.PLAYING:
                         player.status = PlayerStatus.SURVIVED
