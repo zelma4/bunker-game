@@ -193,6 +193,11 @@ function gamePage(gameCode) {
                     console.log('[WS] Phase change received:', data.data);
                     this.game.phase = data.data.phase;
                     this.game.phase_end_time = data.data.phase_end_time;
+                    
+                    // Reset advancing flag when phase changes
+                    this.isAdvancing = false;
+                    this.timerExpiredAt = null;
+                    
                     this.startTimer(); // Restart timer with new phase_end_time
 
                     // Reload character data if game started
@@ -531,9 +536,11 @@ function gamePage(gameCode) {
         },
 
         isAdvancing: false,
+        timerExpiredAt: null, // Track when timer first hit 0
 
         startTimer() {
             if (this.timerInterval) clearInterval(this.timerInterval);
+            this.timerExpiredAt = null; // Reset on new timer start
 
             this.timerInterval = setInterval(() => {
                 if (this.game.phase_end_time) {
@@ -552,14 +559,30 @@ function gamePage(gameCode) {
                         console.log(`[TIMER] Phase: ${this.game.phase}, Remaining: ${diff}s, isHost: ${this.isHost}, isAdvancing: ${this.isAdvancing}, phase_end_time: ${this.game.phase_end_time}`);
                     }
 
-                    // Auto-advance phase when timer expires (only host)
-                    if (diff === 0 && this.isHost && !this.isAdvancing) {
-                        console.log('[TIMER] ⏰ Time expired! Auto-advancing phase as host...');
-                        this.isAdvancing = true;
-                        this.advancePhase();
+                    // Auto-advance phase when timer expires
+                    if (diff === 0 && !this.isAdvancing) {
+                        // Track when timer first expired
+                        if (!this.timerExpiredAt) {
+                            this.timerExpiredAt = Date.now();
+                        }
+
+                        const secondsSinceExpired = (Date.now() - this.timerExpiredAt) / 1000;
+
+                        // Host advances immediately, others wait 3 seconds as fallback
+                        if (this.isHost) {
+                            console.log('[TIMER] ⏰ Time expired! Auto-advancing phase as host...');
+                            this.isAdvancing = true;
+                            this.advancePhase();
+                        } else if (secondsSinceExpired >= 3) {
+                            // Fallback: if host hasn't advanced after 3 seconds, any player can do it
+                            console.log('[TIMER] ⏰ Host did not advance phase, fallback advancing...');
+                            this.isAdvancing = true;
+                            this.advancePhase();
+                        }
                     }
                 } else {
                     this.timeRemaining = 0;
+                    this.timerExpiredAt = null;
                     // Log missing phase_end_time for any non-lobby/ended phase
                     if (this.game.phase !== 'lobby' && this.game.phase !== 'ended') {
                         console.log(`[TIMER] ⚠️ No phase_end_time set for phase: ${this.game.phase}`);

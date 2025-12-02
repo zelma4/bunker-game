@@ -236,13 +236,13 @@
                                 x-text="myCharacter.special_condition?.description"></div>
 
                             <!-- Use Special Button -->
-                            <div x-show="myCharacter.special_condition && !myPlayer.special_used" class="mt-2">
+                            <div x-show="myCharacter.special_condition && myPlayer && !myPlayer.special_used" class="mt-2">
                                 <button @click="useSpecial()"
                                     class="btn-secondary text-xs w-full bg-yellow-600 hover:bg-yellow-700">
                                     ⚡ Використати
                                 </button>
                             </div>
-                            <div x-show="myPlayer.special_used" class="mt-2 text-xs text-green-400">
+                            <div x-show="myPlayer?.special_used" class="mt-2 text-xs text-green-400">
                                 ✓ Використано
                             </div>
                         </div>
@@ -291,7 +291,7 @@
 
                                         <!-- Vote button -->
                                         <div
-                                            x-show="game.phase === 'voting' && player.status === 'playing' && !myPlayer.has_voted && player.id !== myPlayer.id">
+                                            x-show="game.phase === 'voting' && player.status === 'playing' && myPlayer && !myPlayer.has_voted && player.id !== myPlayer.id">
                                             <button @click="vote(player.id)" class="btn-vote">
                                                 Голос
                                             </button>
@@ -411,7 +411,7 @@
                     <div x-show="game.phase === 'voting'" class="text-orange-400">
                         <p class="text-xl font-semibold mb-2">🗳️ Фаза Голосування</p>
                         <p class="text-gray-400">Голосуй за гравця, якого хочеш виключити</p>
-                        <p x-show="myPlayer.has_voted" class="text-green-400 mt-2">✓ Ви проголосували</p>
+                        <p x-show="myPlayer?.has_voted" class="text-green-400 mt-2">✓ Ви проголосували</p>
                     </div>
 
                     <div x-show="game.phase === 'reveal'" class="text-red-400">
